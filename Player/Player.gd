@@ -15,6 +15,7 @@ var mouse_dir := Vector2.ZERO
 var move_dir := Vector2.ZERO
 var velocity := Vector2.ZERO
 
+onready var _player_camera := $Camera2D
 onready var _sprite := $Sprite
 onready var _poster_gun := $Gun
 onready var _egg_thrower := $EggThrower
@@ -60,7 +61,9 @@ func update_sprites() -> void:
 
 func remove_player_control() -> void:
 	_in_player_control = false
+	_player_camera.current = false
 
 
 func return_player_control() -> void:
 	_in_player_control = true
+	_player_camera.current = true

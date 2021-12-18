@@ -1,0 +1,132 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/PlayerUI/PlayerUI.gd" type="Script" id=1]
+[ext_resource path="res://UI/PlayerUI/AreaProgress.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Projectiles/Poster/PaperRef.png" type="Texture" id=3]
+[ext_resource path="res://Projectiles/Egg/EggRef.png" type="Texture" id=4]
+[ext_resource path="res://UI/PlayerUI/IndicatorArrow.tscn" type="PackedScene" id=5]
+
+[node name="PlayerUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+_progress_container = NodePath("GameProgress")
+_area_progress_scene = ExtResource( 2 )
+_time_text = NodePath("GameStats/TimeLabel")
+_score_text = NodePath("GameStats/ScoreLabel")
+_egg_text = NodePath("AmmoDetails/EggCounter/Amount")
+_poster_text = NodePath("AmmoDetails/PosterCounter/Amount")
+_indicator_container = NodePath("IndicationArrows")
+_indicator_arrow_scene = ExtResource( 5 )
+
+[node name="GameProgress" type="VBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 195.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressTitle" type="Label" parent="GameProgress"]
+margin_right = 189.0
+margin_bottom = 14.0
+text = "Progress:"
+
+[node name="AreaProgress" parent="GameProgress" instance=ExtResource( 2 )]
+margin_top = 18.0
+margin_right = 189.0
+margin_bottom = 32.0
+
+[node name="AreaProgress2" parent="GameProgress" instance=ExtResource( 2 )]
+margin_top = 36.0
+margin_right = 189.0
+margin_bottom = 50.0
+
+[node name="AreaProgress3" parent="GameProgress" instance=ExtResource( 2 )]
+margin_top = 54.0
+margin_right = 189.0
+margin_bottom = 68.0
+
+[node name="AreaProgress4" parent="GameProgress" instance=ExtResource( 2 )]
+margin_top = 72.0
+margin_right = 189.0
+margin_bottom = 86.0
+
+[node name="GameStats" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -126.0
+margin_top = 16.0
+margin_right = -6.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeLabel" type="Label" parent="GameStats"]
+margin_right = 120.0
+margin_bottom = 14.0
+text = "Time: 00:00:00"
+
+[node name="ScoreLabel" type="Label" parent="GameStats"]
+margin_top = 18.0
+margin_right = 120.0
+margin_bottom = 32.0
+text = "Score: 0"
+
+[node name="AmmoDetails" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -56.0
+margin_right = -16.0
+margin_bottom = -24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EggCounter" type="HBoxContainer" parent="AmmoDetails"]
+margin_right = 48.0
+margin_bottom = 14.0
+
+[node name="Icon" type="TextureRect" parent="AmmoDetails/EggCounter"]
+margin_right = 6.0
+margin_bottom = 14.0
+texture = ExtResource( 4 )
+stretch_mode = 4
+
+[node name="Amount" type="Label" parent="AmmoDetails/EggCounter"]
+margin_left = 10.0
+margin_right = 18.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="PosterCounter" type="HBoxContainer" parent="AmmoDetails"]
+margin_top = 18.0
+margin_right = 48.0
+margin_bottom = 32.0
+
+[node name="Icon" type="TextureRect" parent="AmmoDetails/PosterCounter"]
+margin_right = 6.0
+margin_bottom = 14.0
+texture = ExtResource( 3 )
+stretch_mode = 4
+
+[node name="Amount" type="Label" parent="AmmoDetails/PosterCounter"]
+margin_left = 10.0
+margin_right = 18.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="IndicationArrows" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": true
+}

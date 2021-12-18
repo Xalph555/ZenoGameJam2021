@@ -27,7 +27,11 @@ func shoot(shoot_rot: float, start_pos: Vector2, projectile_speed: float) -> voi
 
 func _on_HurtBox_area_entered(area: Area2D) -> void:
 	queue_free()
+func _on_HurtBox_body_entered(body: Node) -> void:
+	queue_free()
 
 
 func _on_Timer_timeout() -> void:
 	queue_free()
+
+

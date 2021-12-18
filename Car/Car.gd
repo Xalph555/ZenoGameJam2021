@@ -29,6 +29,9 @@ var _traction_slow := 0.7
 var _steer_angle := 0.0
 var velocity := Vector2.ZERO
 
+onready var _player_camera = $Camera2D
+onready var _interact_label = $LabelPosition
+
 
 func _input(event: InputEvent) -> void:
 	if _player_reference:
@@ -59,6 +62,10 @@ func get_input() -> void:
 
 func _physics_process(delta: float) -> void:
 	update_movement(delta)
+	
+	_interact_label.global_rotation = 0
+	if _in_player_control:
+		_interact_label.visible = false
 
 
 func update_movement(delta: float) -> void:
@@ -115,6 +122,9 @@ func player_enter_car() -> void:
 	_player_enter_pos = to_local(_player_reference.global_position)
 	
 	_player_reference.visible = false
+	_interact_label.visible = false
+	
+	_player_camera.current = true
 
 
 func player_exit_car() -> void:
@@ -124,12 +134,18 @@ func player_exit_car() -> void:
 	_player_reference.global_position = to_global(_player_enter_pos)
 	
 	_player_reference.visible = true
+	
+	_player_camera.current = false
 
 
 func _on_PlayerInteractArea_body_entered(body: Node) -> void:
 	_player_reference = body as Player
+	
+	if _player_reference != null:
+		_interact_label.visible = true
 
 
 func _on_PlayerInteractArea_body_exited(body: Node) -> void:
 	if !_in_player_control and body == _player_reference:
 		_player_reference = null
+		_interact_label.visible = false
