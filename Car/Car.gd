@@ -10,20 +10,20 @@ var _player_reference : Player
 var _player_enter_pos := Vector2.ZERO
 
 # car movement vars
-var _friction := -1.0 # lower max speed - make larger
-var _drag := -0.001 # lower max speed - make smaller
+var _friction := -0.7 # lower max speed - make larger
+var _drag := -0.0001 # lower max speed - make smaller
 
-var _wheel_dist := 70.0
-var _steering_angle := 50.0
+var _wheel_dist := 50.0
+var _steering_angle := 60.0
 
 var _move_speed := 200.0
 var _acceleration := Vector2.ZERO
 
-var _break_speed := -200
+var _break_speed := -200.0
 var _max_reverse_speed := 400
 
 var _slip_speed := 100.0
-var _traction_fast := 0.1
+var _traction_fast := 0.6
 var _traction_slow := 0.7
 
 var _steer_angle := 0.0
@@ -71,12 +71,11 @@ func _physics_process(delta: float) -> void:
 func update_movement(delta: float) -> void:
 	_acceleration = Vector2.ZERO
 	
-	apply_friction()
-	
 	if _in_player_control:
 		get_input() 
 	
 	calculate_steering(delta)
+	apply_friction()
 	
 	velocity += _acceleration * delta
 	velocity = move_and_slide(velocity)
