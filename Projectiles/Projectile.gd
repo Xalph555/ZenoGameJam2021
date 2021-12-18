@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	position += velocity * delta
 
 
-func shoot(shoot_rot, start_pos, projectile_speed) -> void:
+func shoot(shoot_rot: float, start_pos: Vector2, projectile_speed: float) -> void:
 	move_dir = move_dir.rotated(shoot_rot)
 	move_speed = projectile_speed
 	rotation = shoot_rot + rot_adjust

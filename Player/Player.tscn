@@ -6,8 +6,8 @@
 [ext_resource path="res://Player/EggThrower/EggThrower.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.0
-height = 4.0
+radius = 3.0
+height = 2.0
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
@@ -20,6 +20,8 @@ script = ExtResource( 3 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 3 )
+rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Gun" parent="." instance=ExtResource( 2 )]

@@ -4,7 +4,7 @@
 extends Node2D
 
 export(PackedScene) var _egg_scene = _egg_scene as Projectile
-export var _projectile_force := 500
+export var _projectile_force := 400
 
 onready var _parent := get_parent()
 onready var _shoot_dir := Vector2.ZERO
@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	rotation_degrees = wrapf(rotation_degrees, 0, 360)
 
 
-func shoot(amount) -> void:
+func shoot(amount: int) -> void:
 	for i in range (amount):
 		var _egg_temp = _egg_scene.instance() as Projectile
 		get_viewport().add_child(_egg_temp)

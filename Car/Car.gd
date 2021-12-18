@@ -3,7 +3,133 @@
 
 extends KinematicBody2D
 
+class_name Car
+
+var _in_player_control := false
+var _player_reference : Player
+var _player_enter_pos := Vector2.ZERO
+
+# car movement vars
+var _friction := -1.0 # lower max speed - make larger
+var _drag := -0.001 # lower max speed - make smaller
+
+var _wheel_dist := 70.0
+var _steering_angle := 50.0
+
+var _move_speed := 200.0
+var _acceleration := Vector2.ZERO
+
+var _break_speed := -200
+var _max_reverse_speed := 400
+
+var _slip_speed := 100.0
+var _traction_fast := 0.1
+var _traction_slow := 0.7
+
+var _steer_angle := 0.0
+var velocity := Vector2.ZERO
 
 
-func _ready() -> void:
-	pass
+func _input(event: InputEvent) -> void:
+	if _player_reference:
+		if event.is_action_pressed("ui_interact"):
+			if !_in_player_control:
+				player_enter_car()
+				
+			elif _in_player_control:
+				player_exit_car()
+
+
+func get_input() -> void:
+	var turn = 0
+	
+	if Input.is_action_pressed("ui_move_right"):
+		turn += 1
+	if Input.is_action_pressed("ui_move_left"):
+		turn -= 1
+	
+	_steer_angle = turn * deg2rad(_steering_angle)
+
+	if Input.is_action_pressed("ui_move_up"):
+		_acceleration = transform.x * _move_speed
+	
+	if Input.is_action_pressed("ui_move_down"):
+		_acceleration = transform.x * _break_speed
+
+
+func _physics_process(delta: float) -> void:
+	update_movement(delta)
+
+
+func update_movement(delta: float) -> void:
+	_acceleration = Vector2.ZERO
+	
+	apply_friction()
+	
+	if _in_player_control:
+		get_input() 
+	
+	calculate_steering(delta)
+	
+	velocity += _acceleration * delta
+	velocity = move_and_slide(velocity)
+
+
+func calculate_steering(delta: float) -> void:
+	var _rear_wheels := position - (transform.x * _wheel_dist / 2.0)
+	var _front_wheels := position + (transform.x * _wheel_dist / 2.0)
+	
+	_rear_wheels += velocity * delta
+	_front_wheels += velocity.rotated(_steer_angle) * delta
+	
+	var _forward_dir := (_front_wheels - _rear_wheels).normalized()
+	
+	var _traction := _traction_slow
+	if velocity.length() > _slip_speed:
+		_traction = _traction_fast
+	
+	var d := _forward_dir.dot(velocity.normalized())
+	if d > 0:
+		velocity = velocity.linear_interpolate(_forward_dir * velocity.length(), _traction)
+	
+	if d < 0:
+		velocity = -_forward_dir * min(velocity.length(), _max_reverse_speed)
+
+	rotation = _forward_dir.angle()
+
+
+func apply_friction() -> void:
+	if velocity.length() < 5:
+		velocity = Vector2.ZERO
+	
+	var _friction_force = velocity * _friction
+	var _drag_force = velocity * velocity.length() * _drag
+	
+	_acceleration += _drag_force + _friction_force
+
+
+func player_enter_car() -> void:
+	_player_reference.remove_player_control()
+	_in_player_control = true
+	
+	_player_enter_pos = to_local(_player_reference.global_position)
+	
+	_player_reference.visible = false
+
+
+func player_exit_car() -> void:
+	_player_reference.return_player_control()
+	_in_player_control = false
+	
+	_player_reference.global_position = to_global(_player_enter_pos)
+	
+	_player_reference.visible = true
+
+
+func _on_PlayerInteractArea_body_entered(body: Node) -> void:
+	_player_reference = body as Player
+
+
+func _on_PlayerInteractArea_body_exited(body: Node) -> void:
+	if !_in_player_control and body == _player_reference:
+		_player_reference = null

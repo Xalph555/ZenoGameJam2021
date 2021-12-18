@@ -31,7 +31,7 @@ func update_sprite() -> void:
 		_pivot.scale.y = 1
 
 
-func shoot(amount) -> void:
+func shoot(amount: int) -> void:
 	for i in range (amount):
 		var _poster_temp = _poster_scene.instance() as Projectile
 		get_viewport().add_child(_poster_temp)
