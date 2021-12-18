@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/PosterGun/Gun.gd" type="Script" id=1]
+[ext_resource path="res://Player/PosterGun/GunRef.png" type="Texture" id=2]
+[ext_resource path="res://Projectiles/Poster/PosterProjectile.tscn" type="PackedScene" id=3]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource( 1 )
+_poster_scene = ExtResource( 3 )
+
+[node name="Pivot" type="Position2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Pivot"]
+position = Vector2( 5, -1 )
+texture = ExtResource( 2 )
+
+[node name="FirePoint" type="Position2D" parent="Pivot"]
+position = Vector2( 9, 0 )
