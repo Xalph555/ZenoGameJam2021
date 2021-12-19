@@ -8,7 +8,7 @@ class_name Player
 export var posters_to_fire := 1
 export var eggs_to_throw := 1
 
-var _in_player_control := true
+var _in_player_control := false
 
 var _move_speed := 250.0
 var mouse_dir := Vector2.ZERO
@@ -19,6 +19,12 @@ onready var _player_camera := $Camera2D
 onready var _sprite := $Sprite
 onready var _poster_gun := $Gun
 onready var _egg_thrower := $EggThrower
+onready var collision_shape := $CollisionShape2D
+
+
+func _ready() -> void:
+	GameEvents.connect("start_game", self, "_on_start_game")
+	GameEvents.connect("game_over", self, "_on_game_over")
 
 
 func get_input() -> void:
@@ -29,11 +35,13 @@ func get_input() -> void:
 	mouse_dir = (get_global_mouse_position() - self.global_position).normalized()
 	
 	# poster gun fire
-	if Input.is_action_just_pressed("ui_shoot_primary"):
+	if Input.is_action_just_pressed("ui_shoot_primary") and \
+			posters_to_fire <= PlayerStats.poster_ammo:
 		_poster_gun.shoot(posters_to_fire)
 	
 	# egg throw
-	if Input.is_action_just_pressed("ui_shoot_secondary"):
+	if Input.is_action_just_pressed("ui_shoot_secondary") and \
+			eggs_to_throw <= PlayerStats.egg_ammo:
 		_egg_thrower.shoot(eggs_to_throw)
 
 
@@ -57,13 +65,29 @@ func update_sprites() -> void:
 		_sprite.scale.x = -1
 	elif move_dir.x < 0:
 		_sprite.scale.x = 1
+	
+	if PlayerStats.poster_ammo > 0:
+		_poster_gun.visible = true
+		
+	else:
+		_poster_gun.visible = false
 
 
 func remove_player_control() -> void:
 	_in_player_control = false
+	collision_shape.disabled = true
 	_player_camera.current = false
 
 
 func return_player_control() -> void:
 	_in_player_control = true
+	collision_shape.disabled = false
 	_player_camera.current = true
+
+
+func _on_start_game() -> void:
+	_in_player_control = true
+
+
+func _on_game_over() -> void:
+	_in_player_control = false

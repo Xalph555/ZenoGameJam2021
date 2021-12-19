@@ -4,3 +4,5 @@
 
 [node name="PlayerStats" type="Node"]
 script = ExtResource( 1 )
+base_poster_ammo = 60
+base_egg_ammo = 4

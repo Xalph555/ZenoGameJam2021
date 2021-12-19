@@ -21,6 +21,12 @@ onready var poster_ammo := base_poster_ammo setget set_poster_ammo
 onready var egg_ammo := base_egg_ammo setget set_egg_ammo
 
 
+func reset_stats() -> void:
+	score = 0
+	poster_ammo = base_poster_ammo
+	egg_ammo = base_egg_ammo
+
+
 func set_score(points : int):
 	score = points
 	emit_signal("score_changed", score)

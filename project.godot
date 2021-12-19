@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player.gd"
 }, {
+"base": "Control",
+"class": "PlayerUI",
+"language": "GDScript",
+"path": "res://UI/PlayerUI/PlayerUI.gd"
+}, {
 "base": "Area2D",
 "class": "PosterableArea",
 "language": "GDScript",
@@ -61,6 +66,7 @@ _global_script_class_icons={
 "Hurtbox": "",
 "LevelManager": "",
 "Player": "",
+"PlayerUI": "",
 "PosterableArea": "",
 "PosterableObject": "",
 "Projectile": ""
@@ -69,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ZenoGameJam2021"
-run/main_scene="res://Map/MainLevel.tscn"
+run/main_scene="res://UI/MainMenu/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

@@ -4,6 +4,9 @@
 extends StaticBody2D
 class_name PosterableObject
 
+signal health_changed(amount)
+signal object_postered(object)
+
 export var max_health := 50
 export var points := 0
 
@@ -37,6 +40,8 @@ func set_health(value : int):
 		_completed_particles.emitting = true
 		_hurt_box.disable_collisions()
 		_health_bar.visible = false
+		
+		emit_signal("object_postered", self)
 
 
 func hurt_flash() -> void:
@@ -49,5 +54,7 @@ func _on_HurtBox_area_entered(area: Area2D) -> void:
 	var _poster := area as Hitbox
 	
 	if _poster:
+		emit_signal("health_changed", -_poster.damage)
+		
 		_health_bar.visible = true
 		self.health -= _poster.damage

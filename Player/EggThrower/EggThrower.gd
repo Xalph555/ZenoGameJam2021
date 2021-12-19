@@ -27,3 +27,5 @@ func shoot(amount: int) -> void:
 		var projectile_rot = deg2rad((180.0 / (amount + 1.0)) * (i + 1.0) + self.rotation_degrees)
 	
 		_egg_temp.shoot(projectile_rot, _fire_point.global_position, _projectile_force)
+		
+		PlayerStats.egg_ammo -= 1

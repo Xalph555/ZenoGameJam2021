@@ -33,6 +33,10 @@ onready var _player_camera = $Camera2D
 onready var _interact_label = $LabelPosition
 
 
+func _ready() -> void:
+	GameEvents.connect("game_over", self, "_on_game_over")
+
+
 func _input(event: InputEvent) -> void:
 	if _player_reference:
 		if event.is_action_pressed("ui_interact"):
@@ -148,3 +152,7 @@ func _on_PlayerInteractArea_body_exited(body: Node) -> void:
 	if !_in_player_control and body == _player_reference:
 		_player_reference = null
 		_interact_label.visible = false
+
+
+func _on_game_over() -> void:
+	_in_player_control = false

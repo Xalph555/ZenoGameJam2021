@@ -3,6 +3,9 @@
 
 extends Control
 
+class_name PlayerUI
+
+
 export(NodePath) onready var _progress_container = get_node(_progress_container) as VBoxContainer
 export(PackedScene) var _area_progress_scene = _area_progress_scene as AreaProgressBar
 
@@ -24,19 +27,32 @@ func _ready() -> void:
 	PlayerStats.connect("score_changed", self, "_on_score_changed")
 	PlayerStats.connect("poster_ammo_changed", self, "_on_poster_ammo_changed")
 	PlayerStats.connect("egg_ammo_changed", self, "_on_egg_ammo_changed")
-	
 
 
 func reset_ui() -> void:
-	create_area_bars()
 	set_time_text(1)
 	set_score_text(PlayerStats.score)
 	set_egg_text(PlayerStats.egg_ammo)
 	set_poster_text(PlayerStats.poster_ammo)
 
 
-func create_area_bars() -> void:
-	pass
+func create_area_bars(all_areas : Array) -> void:
+	for i in all_areas:
+		# area bar 
+		var temp_progress_bar = _area_progress_scene.instance() as AreaProgressBar
+		_progress_container.add_child(temp_progress_bar)
+		
+		temp_progress_bar.set_area_name(i.area_name)
+		
+		i.connect("area_progress_changed", temp_progress_bar, "set_area_progress")
+		
+#		# indicator arrow
+#		var temp_indicator_arrow = _indicator_arrow_scene.instance()
+#		_indicator_container.add_child(temp_indicator_arrow)
+#
+#		temp_indicator_arrow.target = i
+#
+#		i.connect("area_completed", temp_indicator_arrow, "_on_area_completed")
 
 
 func set_time_text(time: float) -> void:
