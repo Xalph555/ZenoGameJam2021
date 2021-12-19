@@ -10,7 +10,9 @@ export var points := 0
 onready var health = max_health setget set_health
 
 onready var _health_bar := $HealthBar
-onready var sprite := $Sprite
+onready var _sprite := $Sprite
+onready var _completed_particles := $Particles2D
+onready var _hurt_box := $HurtBox
 
 
 func _ready() -> void:
@@ -23,16 +25,24 @@ func set_health(value : int):
 	
 	hurt_flash()
 	
+	if health <= max_health * 1 / 3:
+		_sprite.frame = 2
+		
+	elif health <= max_health * 2 / 3:
+		_sprite.frame = 1
+	
 	if health <= 0:
 		PlayerStats.score += points
 		
-		self.visible = false
+		_completed_particles.emitting = true
+		_hurt_box.disable_collisions()
+		_health_bar.visible = false
 
 
 func hurt_flash() -> void:
-	sprite.material.set_shader_param("active", true)
+	_sprite.material.set_shader_param("active", true)
 	yield(get_tree().create_timer(0.05), "timeout")
-	sprite.material.set_shader_param("active", false)
+	_sprite.material.set_shader_param("active", false)
 
 
 func _on_HurtBox_area_entered(area: Area2D) -> void:

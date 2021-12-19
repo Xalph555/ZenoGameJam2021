@@ -4,8 +4,8 @@
 [ext_resource path="res://Car/Car.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 6.5
-height = 13.0
+radius = 6.99997
+height = 16.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 19.0066
@@ -17,6 +17,11 @@ collision_mask = 512
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, 3 )
+limit_left = -16
+limit_top = -16
+limit_right = 2912
+limit_bottom = 2256
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

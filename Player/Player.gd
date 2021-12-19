@@ -54,9 +54,9 @@ func update_movement(delta: float) -> void:
 
 func update_sprites() -> void:
 	if move_dir.x > 0:
-		_sprite.scale.x = 1
-	elif move_dir.x < 0:
 		_sprite.scale.x = -1
+	elif move_dir.x < 0:
+		_sprite.scale.x = 1
 
 
 func remove_player_control() -> void:

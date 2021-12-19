@@ -6,6 +6,7 @@ extends Area2D
 class_name PosterableArea
 
 export var points := 0
+export var extra_time := 0.0
 
 var posterable_objects = []
 

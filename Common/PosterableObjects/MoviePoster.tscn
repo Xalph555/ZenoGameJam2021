@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Common/PosterableObjects/MoviePoster.png" type="Texture" id=1]
+[ext_resource path="res://Common/PosterableObjects/PosterableObject.gd" type="Script" id=2]
+[ext_resource path="res://Common/HurtAndHitBox/HurtBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/HealthBar/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Shaders/WhiteHit.shader" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+shader_param/active = false
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 3.5
+height = 4.0
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 12, 16 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.3 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 35.26
+gravity = Vector3( 0, 80, 0 )
+initial_velocity = 30.0
+angular_velocity = 120.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 100.0
+radial_accel_random = 1.0
+scale = 4.0
+scale_curve = SubResource( 11 )
+color = Color( 1.16, 1.75, 1, 1 )
+
+[node name="MoviePoster" type="StaticBody2D"]
+scale = Vector2( 2, 2 )
+collision_layer = 1536
+collision_mask = 0
+script = ExtResource( 2 )
+max_health = 120
+points = 50
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 10 )
+position = Vector2( 0, -16 )
+texture = ExtResource( 1 )
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -0.5 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 3 )]
+collision_layer = 1024
+collision_mask = 2
+monitorable = true
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, -19 )
+shape = SubResource( 7 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 4 )]
+visible = false
+margin_left = -11.0
+margin_top = -38.0
+margin_right = 11.0
+margin_bottom = -37.0
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, -13 )
+emitting = false
+amount = 10
+lifetime = 0.9
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+randomness = 0.61
+process_material = SubResource( 9 )
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
+[editable path="HurtBox"]
