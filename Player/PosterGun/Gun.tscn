@@ -1,9 +1,31 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/PosterGun/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Player/PosterGun/GunRef.png" type="Texture" id=2]
 [ext_resource path="res://Projectiles/Poster/PosterProjectile.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/PosterGun/Hand Gun 2.wav" type="AudioStream" id=4]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.171591 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 5
+emission_ring_radius = 2.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 1.0
+flag_disable_z = true
+spread = 60.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_curve = SubResource( 2 )
+color = Color( 0.933333, 0.933333, 0.933333, 1 )
 
 [node name="Gun" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,9 +37,18 @@ bus = "GameSFX"
 
 [node name="Pivot" type="Position2D" parent="."]
 
+[node name="Particles2D" type="Particles2D" parent="Pivot"]
+position = Vector2( 11, -1 )
+emitting = false
+lifetime = 0.2
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+process_material = SubResource( 3 )
+
 [node name="Sprite" type="Sprite" parent="Pivot"]
 position = Vector2( 5, -1 )
 texture = ExtResource( 2 )
 
 [node name="FirePoint" type="Position2D" parent="Pivot"]
-position = Vector2( 9, 0 )
+position = Vector2( 9, -1 )

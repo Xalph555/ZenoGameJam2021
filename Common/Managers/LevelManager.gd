@@ -35,7 +35,8 @@ func _process(delta: float) -> void:
 		GameEvents.emit_signal("time_changed", get_remaining_time())
 	
 	if posterable_areas.size() <= 0:
-		stop_game()
+		_level_timer.stop()
+		stop_game(true)
 
 
 # General Level management
@@ -47,11 +48,17 @@ func start_game() -> void:
 	start_timer()
 
 
-func stop_game() -> void:
+func stop_game(has_won : bool = false) -> void:
+	_level_timer.stop()
+	
 	GameEvents.emit_signal("game_over")
 	BackgroundMusic.change_track(_game_over_music)
 	
 	_player_ui.visible = false
+	
+	if has_won:
+		_game_over_ui.set_win_title()
+	
 	_game_over_ui.play_transition()
 
 

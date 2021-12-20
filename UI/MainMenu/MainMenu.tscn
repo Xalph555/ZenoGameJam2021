@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Fonts/upheavtt.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/MainMenu/MainMenu.gd" type="Script" id=2]
@@ -11,6 +11,26 @@
 [ext_resource path="res://Projectiles/Egg/EggRef.png" type="Texture" id=9]
 [ext_resource path="res://UI/Click.wav" type="AudioStream" id=10]
 [ext_resource path="res://UI/MainMenu/StreetLove.wav" type="AudioStream" id=11]
+[ext_resource path="res://UI/MainMenu/MainMenuBackground.png" type="Texture" id=12]
+
+[sub_resource type="Environment" id=4]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 1.91
+glow_hdr_threshold = 1.5
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 2, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, -9, 0 )
+initial_velocity = 10.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 8.0
+scale_random = 1.0
+color = Color( 2.89, 2.32, 1.16, 1 )
 
 [sub_resource type="DynamicFont" id=1]
 resource_local_to_scene = true
@@ -43,40 +63,57 @@ __meta__ = {
 game_scene = "res://Map/MainLevel.tscn"
 main_menu_music = ExtResource( 11 )
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 4 )
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 bus = "UISFX"
 
 [node name="Background" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -527.0
+margin_top = -315.0
+margin_right = 527.0
+margin_bottom = 315.0
+texture = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 512, 608 )
+amount = 20
+lifetime = 10.0
+preprocess = 60.0
+process_material = SubResource( 5 )
+
 [node name="Title" type="Label" parent="."]
 margin_left = 32.0
 margin_top = 32.0
-margin_right = 673.0
-margin_bottom = 119.0
+margin_right = 721.0
+margin_bottom = 126.0
 custom_fonts/font = SubResource( 1 )
 text = "Remember Me"
 valign = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 70.0
-margin_top = 163.0
-margin_right = 966.0
-margin_bottom = 457.0
+margin_left = 64.0
+margin_top = 160.0
+margin_right = 960.0
+margin_bottom = 454.0
 custom_fonts/normal_font = SubResource( 3 )
-text = "Your best friend's dying wish was to be seen throughout the city. 
-To have their Chadly face be known by all. 
-To be everywhere.
+text = " Your best friend's dying wish was to be seen throughout the city. 
+ To have their Chadly face be known by all. 
+ To be everywhere.
 
-What better way than sticking posters of their face on everything?
+ What better way than sticking posters of their face on everything?
 
       
-	       to move                   to interact
+	       to move                   to enter car
 
            to fire your poster gun   
 		   

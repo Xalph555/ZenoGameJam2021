@@ -1,10 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Car/CarRef.png" type="Texture" id=1]
 [ext_resource path="res://Car/Car.gd" type="Script" id=2]
 [ext_resource path="res://UI/MainMenu/EButton.png" type="Texture" id=3]
 [ext_resource path="res://Car/Vehicle_Car_Drive_Interior_Loop_02.wav" type="AudioStream" id=4]
 [ext_resource path="res://Car/Vehicle_Car_Door_Closing_Exterior_01.wav" type="AudioStream" id=5]
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color = Color( 0.737255, 0.737255, 0.737255, 1 )
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.99997
@@ -31,6 +40,22 @@ limit_left = -16
 limit_top = -16
 limit_right = 2912
 limit_bottom = 2256
+
+[node name="Wheel particles" type="Node2D" parent="."]
+
+[node name="Particles3" type="Particles2D" parent="Wheel particles"]
+position = Vector2( -10, 4 )
+amount = 12
+speed_scale = 2.0
+local_coords = false
+process_material = SubResource( 3 )
+
+[node name="Particles4" type="Particles2D" parent="Wheel particles"]
+position = Vector2( -10, -4 )
+amount = 12
+speed_scale = 2.0
+local_coords = false
+process_material = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

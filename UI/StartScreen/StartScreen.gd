@@ -18,7 +18,8 @@ func start_sequence() -> void:
 	anim_player.play("GoodLuck")
 	yield(anim_player, "animation_finished")
 	anim_player.play("ReadyStart")
-	BackgroundMusic.change_track(_game_music)
+	BackgroundMusic.change_track(_game_music, 4, 4)
 	yield(anim_player, "animation_finished")
+	
 	
 	GameEvents.emit_signal("start_game")

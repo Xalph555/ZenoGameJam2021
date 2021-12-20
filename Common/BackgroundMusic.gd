@@ -24,22 +24,22 @@ func stop_playing() -> void:
 	_music_player.playing = false
 
 
-func fade_in() -> void:
+func fade_in(duration : float = 1) -> void:
 	_music_player.playing = true
-	_tween.interpolate_property(_music_player,'volume_db', _music_player.volume_db, -5, 2, TRANS_FADEIN, EASE_FADEIN)
+	_tween.interpolate_property(_music_player,'volume_db', _music_player.volume_db, -5, duration, TRANS_FADEIN, EASE_FADEIN)
 	_tween.start()
 	
 
-func fade_out() -> void:
-	_tween.interpolate_property(_music_player,'volume_db', _music_player.volume_db, -40, 2, TRANS_FADEIN, EASE_FADEOUT)
+func fade_out(duration : float = 1) -> void:
+	_tween.interpolate_property(_music_player,'volume_db', _music_player.volume_db, -40, duration, TRANS_FADEIN, EASE_FADEOUT)
 	_tween.start()
 
 
-func change_track(audio : AudioStreamSample) -> void:
-	fade_out()
+func change_track(audio : AudioStreamSample, fade_in_duration: float = 1, fade_out_duration: float = 1) -> void:
+	fade_out(fade_out_duration)
 	yield(_tween, "tween_completed")
 	_music_player.stream = audio
-	fade_in()
+	fade_in(fade_in_duration)
 	
 	emit_signal("music_changed")
 

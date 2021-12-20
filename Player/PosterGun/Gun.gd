@@ -10,6 +10,7 @@ onready var _parent := get_parent()
 onready var _shoot_dir := Vector2.ZERO
 
 onready var _pivot := $Pivot
+onready var _fire_particles := $Pivot/Particles2D
 onready var _fire_point := $Pivot/FirePoint
 onready var _sfx_player := $AudioStreamPlayer
 
@@ -44,3 +45,4 @@ func shoot(amount: int) -> void:
 		PlayerStats.poster_ammo -= 1
 	
 	_sfx_player.play()
+	_fire_particles.emitting = true
