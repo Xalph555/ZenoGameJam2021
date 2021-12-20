@@ -11,6 +11,7 @@ onready var _shoot_dir := Vector2.ZERO
 
 onready var _pivot := $Pivot
 onready var _fire_point := $Pivot/FirePoint
+onready var _sfx_player := $AudioStreamPlayer
 
 
 func _process(delta: float) -> void:
@@ -41,3 +42,5 @@ func shoot(amount: int) -> void:
 		_poster_temp.shoot(projectile_rot, _fire_point.global_position, _projectile_force)
 		
 		PlayerStats.poster_ammo -= 1
+	
+	_sfx_player.play()

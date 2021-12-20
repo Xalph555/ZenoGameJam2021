@@ -6,6 +6,7 @@ func egg_break() -> void:
 	move_dir = Vector2.ZERO
 	self.self_modulate = Color(1, 1, 1, 0)
 	$Particles2D.emitting = true
+	$AudioStreamPlayer2D.play()
 	yield(get_tree().create_timer(1), "timeout")
 	call_deferred("free")
 

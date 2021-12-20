@@ -3,6 +3,9 @@ extends Projectile
 
 func remove_flying_poster() -> void:
 	$Timer.stop()
+	move_dir = Vector2.ZERO
+	$AudioStreamPlayer2D.play()
+	yield(get_tree().create_timer(0.1), "timeout")
 	call_deferred("free")
 
 

@@ -1,15 +1,17 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Common/PosterableObjects/PosterableObject.gd" type="Script" id=1]
 [ext_resource path="res://Common/HurtAndHitBox/HurtBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/HealthBar/HealthBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Shaders/WhiteHit.shader" type="Shader" id=4]
 [ext_resource path="res://Common/PosterableObjects/Tree.png" type="Texture" id=5]
+[ext_resource path="res://Common/PosterableObjects/Pop_up.wav" type="AudioStream" id=6]
 
 [sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
 shader_param/active = false
+shader_param/is_hurt = true
 
 [sub_resource type="CapsuleShape2D" id=8]
 radius = 3.0
@@ -46,6 +48,10 @@ collision_mask = 0
 script = ExtResource( 1 )
 max_health = 160
 points = 45
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "GameSFX"
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 7 )

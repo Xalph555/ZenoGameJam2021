@@ -18,6 +18,7 @@ onready var _health_bar := $HealthBar
 onready var _sprite := $Sprite
 onready var _completed_particles := $Particles2D
 onready var _hurt_box := $HurtBox
+onready var _sfx_player := $AudioStreamPlayer2D
 
 
 func _ready() -> void:
@@ -45,6 +46,8 @@ func set_health(value : int):
 		_completed_particles.emitting = true
 		_hurt_box.disable_collisions()
 		_health_bar.visible = false
+		
+		_sfx_player.play()
 		
 		emit_signal("object_postered", self)
 	

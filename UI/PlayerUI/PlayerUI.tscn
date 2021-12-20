@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://UI/PlayerUI/PlayerUI.gd" type="Script" id=1]
 [ext_resource path="res://UI/PlayerUI/AreaProgress.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://UI/PlayerUI/PaperIcon.png" type="Texture" id=4]
 [ext_resource path="res://UI/PlayerUI/IndicatorArrow.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Fonts/upheavtt.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://UI/PlayerUI/DM-CGS-15.wav" type="AudioStream" id=7]
 
 [sub_resource type="Animation" id=6]
 resource_name = "AreaComplete"
@@ -247,6 +248,10 @@ _indicator_arrow_scene = ExtResource( 5 )
 reset_on_save = false
 anims/AreaComplete = SubResource( 6 )
 anims/RESET = SubResource( 7 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "UISFX"
 
 [node name="GameProgress" type="VBoxContainer" parent="."]
 margin_left = 24.0

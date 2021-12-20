@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/PlayerRef.png" type="Texture" id=1]
 [ext_resource path="res://Player/PosterGun/Gun.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.gd" type="Script" id=3]
 [ext_resource path="res://Player/EggThrower/EggThrower.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Common/WalkSound.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -53,6 +54,24 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 2, 3 ]
 }
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0, 0.3 )
+}
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.5
@@ -62,6 +81,10 @@ height = 2.0
 scale = Vector2( 2, 2 )
 collision_mask = 512
 script = ExtResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "GameSFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"

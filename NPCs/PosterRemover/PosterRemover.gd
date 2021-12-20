@@ -7,6 +7,7 @@ class_name PosterRemover
 export(NodePath) onready var _assigned_area = get_node(_assigned_area) as PosterableArea
 
 export var heal_amount := 10
+export(AudioStreamSample) var sfx_poster_rip
 
 var _move_speed := 180.0
 var _move_dir := Vector2.ZERO
@@ -23,6 +24,7 @@ onready var _heal_rate_timer := $HealRate
 onready var _stun_timer := $StunTimer
 
 onready var _anim_player := $AnimationPlayer
+onready var _sfx_player := $AudioStreamPlayer2D
 onready var _sprite := $Sprite
 onready var _heal_particles := $Particles2D
 
@@ -81,6 +83,8 @@ func heal_target() -> void:
 		_target.heal_object(heal_amount)
 		
 		_heal_particles.emitting = true
+		_sfx_player.stream = sfx_poster_rip
+		_sfx_player.play()
 		
 		if _target.health == _target.max_health:
 			_target.is_npc_targetable = true

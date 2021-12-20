@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DM-CGS-21.wav-6a1411cf7b92cb3f6a1aeaa9c1015d09.sample"
+
+[deps]
+
+source_file="res://Projectiles/Egg/DM-CGS-21.wav"
+dest_files=[ "res://.import/DM-CGS-21.wav-6a1411cf7b92cb3f6a1aeaa9c1015d09.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

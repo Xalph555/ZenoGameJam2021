@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DM-CGS-33.wav-43d8059ebd2f4f65e43290d7a6737d1a.sample"
+
+[deps]
+
+source_file="res://PowerUp/DM-CGS-33.wav"
+dest_files=[ "res://.import/DM-CGS-33.wav-43d8059ebd2f4f65e43290d7a6737d1a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

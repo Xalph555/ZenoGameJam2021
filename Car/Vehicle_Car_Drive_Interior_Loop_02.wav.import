@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Vehicle_Car_Drive_Interior_Loop_02.wav-aa60cbf37effa478487dea11baa333c7.sample"
+
+[deps]
+
+source_file="res://Car/Vehicle_Car_Drive_Interior_Loop_02.wav"
+dest_files=[ "res://.import/Vehicle_Car_Drive_Interior_Loop_02.wav-aa60cbf37effa478487dea11baa333c7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

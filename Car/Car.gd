@@ -5,6 +5,9 @@ extends KinematicBody2D
 
 class_name Car
 
+export(AudioStreamSample) var sfx_car_drive
+export(AudioStreamSample) var sfx_car_interact
+
 var _in_player_control := false
 var _player_reference : Player
 var _player_enter_pos := Vector2.ZERO
@@ -31,6 +34,7 @@ var velocity := Vector2.ZERO
 
 onready var _player_camera = $Camera2D
 onready var _interact_label = $LabelPosition
+onready var _sfx_player = $AudioStreamPlayer2D
 
 
 func _ready() -> void:
@@ -128,9 +132,15 @@ func player_enter_car() -> void:
 	_interact_label.visible = false
 	
 	_player_camera.current = true
+	
+	play_sfx(sfx_car_interact)
+	yield(get_tree().create_timer(0.5), "timeout")
+	play_sfx(sfx_car_drive)
 
 
 func player_exit_car() -> void:
+	play_sfx(sfx_car_interact)
+	
 	_player_reference.return_player_control()
 	_in_player_control = false
 	
@@ -139,6 +149,12 @@ func player_exit_car() -> void:
 	_player_reference.visible = true
 	
 	_player_camera.current = false
+
+
+func play_sfx(sfx : AudioStreamSample) -> void:
+	_sfx_player.stop()
+	_sfx_player.stream = sfx
+	_sfx_player.play()
 
 
 func _on_PlayerInteractArea_body_entered(body: Node) -> void:

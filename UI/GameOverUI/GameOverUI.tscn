@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Fonts/upheavtt.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/GameOverUI/GameOverUI.gd" type="Script" id=2]
+[ext_resource path="res://UI/Click.wav" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=4]
 resource_name = "GameOverTransition"
@@ -85,6 +86,10 @@ main_menu_scene = "res://UI/MainMenu/MainMenu.tscn"
 reset_on_save = false
 anims/GameOverTransition = SubResource( 4 )
 anims/RESET = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "UISFX"
 
 [node name="Panel" type="ColorRect" parent="."]
 anchor_right = 1.0

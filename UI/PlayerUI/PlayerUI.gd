@@ -19,6 +19,7 @@ export(NodePath) onready var _indicator_container = get_node(_indicator_containe
 export(PackedScene) var _indicator_arrow_scene
 
 onready var anim_player := $AnimationPlayer
+onready var _sfx_player := $AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -101,3 +102,4 @@ func _on_egg_ammo_changed(ammo : int):
 
 func _on_area_completed(_area, _time) -> void:
 	anim_player.play("AreaComplete")
+	_sfx_player.play()

@@ -21,6 +21,7 @@ onready var _poster_gun := $Gun
 onready var _egg_thrower := $EggThrower
 onready var collision_shape := $CollisionShape2D
 onready var anim_player := $AnimationPlayer
+onready var _sfx_player := $AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -83,12 +84,18 @@ func update_sprites() -> void:
 
 
 func remove_player_control() -> void:
+	anim_player.play("Idle")
+	_sfx_player.stop()
+	
 	_in_player_control = false
 	collision_shape.disabled = true
 	_player_camera.current = false
 
 
 func return_player_control() -> void:
+	anim_player.play("Idle")
+	_sfx_player.stop()
+	
 	_in_player_control = true
 	collision_shape.disabled = false
 	_player_camera.current = true

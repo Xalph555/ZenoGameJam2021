@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Vehicle_Car_Door_Closing_Exterior_01.wav-b1211b1dff8d2a684ef0aa54c259d476.sample"
+
+[deps]
+
+source_file="res://Car/Vehicle_Car_Door_Closing_Exterior_01.wav"
+dest_files=[ "res://.import/Vehicle_Car_Door_Closing_Exterior_01.wav-b1211b1dff8d2a684ef0aa54c259d476.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

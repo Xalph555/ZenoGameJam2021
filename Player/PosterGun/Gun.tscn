@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player/PosterGun/Gun.gd" type="Script" id=1]
 [ext_resource path="res://Player/PosterGun/GunRef.png" type="Texture" id=2]
 [ext_resource path="res://Projectiles/Poster/PosterProjectile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/PosterGun/Hand Gun 2.wav" type="AudioStream" id=4]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource( 1 )
 _poster_scene = ExtResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "GameSFX"
 
 [node name="Pivot" type="Position2D" parent="."]
 

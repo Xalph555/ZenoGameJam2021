@@ -11,8 +11,10 @@ func play_transition() -> void:
 
 
 func _on_PlayAgainButton_button_down() -> void:
+	$AudioStreamPlayer.play()
 	GameEvents.emit_signal("reload_game")
 
 
 func _on_MainMenuButton2_button_down() -> void:
+	$AudioStreamPlayer.play()
 	get_tree().change_scene(main_menu_scene)
