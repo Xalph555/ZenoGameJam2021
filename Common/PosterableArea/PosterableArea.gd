@@ -75,3 +75,13 @@ func _on_object_postered(object) -> void:
 	object.disconnect("object_postered", self, "_on_object_postered")
 	
 	posterable_objects.erase(object)
+
+
+func _on_PlayerEnteredArea_body_entered(body: Node) -> void:
+	if is_active:
+		$Line2D.visible = false
+
+
+func _on_PlayerEnteredArea_body_exited(body: Node) -> void:
+	if is_active:
+		$Line2D.visible = true

@@ -18,6 +18,8 @@ export(NodePath) onready var _poster_text = get_node(_poster_text) as Label
 export(NodePath) onready var _indicator_container = get_node(_indicator_container) as CenterContainer
 export(PackedScene) var _indicator_arrow_scene
 
+onready var anim_player := $AnimationPlayer
+
 
 func _ready() -> void:
 	# connecting signals
@@ -45,6 +47,7 @@ func create_area_bars(all_areas : Array) -> void:
 		temp_progress_bar.set_area_name(i.area_name)
 		
 		i.connect("area_progress_changed", temp_progress_bar, "set_area_progress")
+		i.connect("area_completed", self, "_on_area_completed")
 		
 #		# indicator arrow
 #		var temp_indicator_arrow = _indicator_arrow_scene.instance()
@@ -94,3 +97,7 @@ func _on_poster_ammo_changed(ammo : int):
 
 func _on_egg_ammo_changed(ammo : int):
 	set_egg_text(ammo)
+
+
+func _on_area_completed(_area, _time) -> void:
+	anim_player.play("AreaComplete")

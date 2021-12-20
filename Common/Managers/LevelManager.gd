@@ -26,12 +26,13 @@ func _ready() -> void:
 	for i in posterable_areas:
 		i.connect("area_completed", self, "_on_area_completed")
 	
+	GameEvents.connect("start_game", self, "_on_start_game")
 	GameEvents.connect("reload_game", self, "_on_reload_game")
 	
 	# FOR TESTING
-	yield(get_tree().create_timer(2), "timeout")
-	GameEvents.emit_signal("start_game")
-	start_game()
+	#yield(get_tree().create_timer(2), "timeout")
+	#GameEvents.emit_signal("start_game")
+	#start_game()
 
 
 func _process(delta: float) -> void:
@@ -45,7 +46,9 @@ func _process(delta: float) -> void:
 # General Level management
 func start_game() -> void:
 	PlayerStats.reset_stats()
+	_player_ui.visible = true
 	_player_ui.create_area_bars(posterable_areas)
+	
 	start_timer()
 
 
@@ -96,5 +99,9 @@ func _on_area_completed(area, time_to_add) -> void:
 
 
 # general game management
+func _on_start_game() -> void:
+	start_game()
+
+
 func _on_reload_game() -> void:
 	get_tree().reload_current_scene()

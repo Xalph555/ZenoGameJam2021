@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Car/Car.tscn" type="PackedScene" id=2]
@@ -25,10 +25,12 @@
 [ext_resource path="res://Fonts/upheavtt.ttf" type="DynamicFontData" id=23]
 [ext_resource path="res://Map/RestoreAmmo.tscn" type="PackedScene" id=24]
 [ext_resource path="res://UI/GameOverUI/GameOverUI.tscn" type="PackedScene" id=25]
+[ext_resource path="res://UI/StartScreen/StartScreen.tscn" type="PackedScene" id=26]
 
 [sub_resource type="Environment" id=3]
 background_mode = 4
 glow_enabled = true
+glow_intensity = 1.91
 glow_hdr_threshold = 1.5
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -37,38 +39,6 @@ extents = Vector2( 1480, 8 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 1136 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "Hover"
-length = 3.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Label:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( -42, -16 ), Vector2( -42, -40 ) ]
-}
-
-[sub_resource type="Animation" id=6]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Label:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -42, -40 ) ]
-}
-
 [sub_resource type="DynamicFont" id=4]
 resource_local_to_scene = true
 size = 96
@@ -76,7 +46,7 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 23 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=5]
 resource_local_to_scene = true
 size = 24
 outline_size = 1
@@ -215,6 +185,13 @@ extra_time = 20.0
 [node name="CollisionPolygon2D" parent="YSort/Cinema/PosterableArea" index="0"]
 polygon = PoolVector2Array( -272, 8, -272, 272, 272, 272, 272, 8 )
 
+[node name="Line2D" parent="YSort/Cinema/PosterableArea" index="1"]
+position = Vector2( 1, 244 )
+points = PoolVector2Array( 0, 0, 0, -601 )
+
+[node name="CollisionPolygon2D" parent="YSort/Cinema/PosterableArea/PlayerEnteredArea" index="0"]
+polygon = PoolVector2Array( -304, 24, -304, 368, 304, 368, 304, 24 )
+
 [node name="Park" type="YSort" parent="YSort"]
 
 [node name="Tree" parent="YSort/Park" instance=ExtResource( 19 )]
@@ -271,6 +248,13 @@ extra_time = 30.0
 [node name="CollisionPolygon2D" parent="YSort/Park/PosterableArea" index="0"]
 polygon = PoolVector2Array( -640, -280, -640, 280, 592, 280, 592, -280 )
 
+[node name="Line2D" parent="YSort/Park/PosterableArea" index="1"]
+position = Vector2( 0, 232 )
+points = PoolVector2Array( 0, 0, 0, -56, 0, -680 )
+
+[node name="CollisionPolygon2D" parent="YSort/Park/PosterableArea/PlayerEnteredArea" index="0"]
+polygon = PoolVector2Array( -600, 288, 552, 288, 552, -176, -600, -176 )
+
 [node name="School" type="YSort" parent="YSort"]
 
 [node name="HighSchool" parent="YSort/School" instance=ExtResource( 8 )]
@@ -318,6 +302,13 @@ extra_time = 15.0
 [node name="CollisionPolygon2D" parent="YSort/School/PosterableArea" index="0"]
 polygon = PoolVector2Array( 248, -200, -296, -200, -288, 368, 248, 368 )
 
+[node name="Line2D" parent="YSort/School/PosterableArea" index="1"]
+position = Vector2( 118, 179 )
+points = PoolVector2Array( 0, 0, 0, -56, 0, -579 )
+
+[node name="CollisionPolygon2D" parent="YSort/School/PosterableArea/PlayerEnteredArea" index="0"]
+polygon = PoolVector2Array( -280, 352, 264, 352, 256, -208, -280, -208 )
+
 [node name="ShoppingStrip" type="YSort" parent="YSort"]
 
 [node name="ShoppingStrip" parent="YSort/ShoppingStrip" instance=ExtResource( 10 )]
@@ -351,13 +342,21 @@ position = Vector2( 2248, 1032 )
 position = Vector2( 2000, 1032 )
 
 [node name="PosterableArea" parent="YSort/ShoppingStrip" instance=ExtResource( 18 )]
-position = Vector2( 2128, 952 )
+position = Vector2( 2128, 1001 )
 area_name = "Shopping Strip"
 points = 500
 extra_time = 10.0
 
 [node name="CollisionPolygon2D" parent="YSort/ShoppingStrip/PosterableArea" index="0"]
+position = Vector2( -1, -48 )
 polygon = PoolVector2Array( -600, -120, 600, -120, 600, 88, -600, 88 )
+
+[node name="Line2D" parent="YSort/ShoppingStrip/PosterableArea" index="1"]
+position = Vector2( 14, 103 )
+points = PoolVector2Array( 0, 0, 0, -56, 0, -489 )
+
+[node name="CollisionPolygon2D" parent="YSort/ShoppingStrip/PosterableArea/PlayerEnteredArea" index="0"]
+polygon = PoolVector2Array( -632, -177, -632, 167, 640, 167, 640, -177 )
 
 [node name="SuperMarket" type="YSort" parent="YSort"]
 
@@ -389,13 +388,21 @@ position = Vector2( 472, 2008 )
 position = Vector2( 176, 1816 )
 
 [node name="PosterableArea" parent="YSort/SuperMarket" instance=ExtResource( 18 )]
-position = Vector2( 432, 1720 )
+position = Vector2( 432, 1768 )
 area_name = "Supermarket"
 points = 500
 extra_time = 15.0
 
 [node name="CollisionPolygon2D" parent="YSort/SuperMarket/PosterableArea" index="0"]
+position = Vector2( 0, -43 )
 polygon = PoolVector2Array( -272, -40, 272, -40, 272, 376, -272, 376 )
+
+[node name="Line2D" parent="YSort/SuperMarket/PosterableArea" index="1"]
+position = Vector2( -88, 296 )
+points = PoolVector2Array( 0, 0, 0, -56, 0, -477 )
+
+[node name="CollisionPolygon2D" parent="YSort/SuperMarket/PosterableArea/PlayerEnteredArea" index="0"]
+polygon = PoolVector2Array( -272, -88, -272, 368, 264, 368, 264, -88 )
 
 [node name="BaseHouse" type="YSort" parent="YSort"]
 
@@ -405,51 +412,26 @@ position = Vector2( 1784, 2024 )
 
 [node name="RestoreAmmo" parent="YSort/BaseHouse" instance=ExtResource( 24 )]
 
+[node name="Label" parent="YSort/BaseHouse/RestoreAmmo/HomeTitle" index="1"]
+margin_top = -16.0
+margin_bottom = 71.0
+custom_fonts/font = SubResource( 4 )
+
+[node name="Label2" parent="YSort/BaseHouse/RestoreAmmo/HomeTitle/Label" index="0"]
+custom_fonts/font = SubResource( 5 )
+
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 1784, 2080 )
 
 [node name="Car" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 1968, 2136 )
 
-[node name="HomeTitle" type="Control" parent="."]
-margin_left = 1704.0
-margin_top = 1904.0
-margin_right = 1744.0
-margin_bottom = 1944.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HomeTitle"]
-autoplay = "Hover"
-anims/Hover = SubResource( 5 )
-anims/RESET = SubResource( 6 )
-
-[node name="Label" type="Label" parent="HomeTitle"]
-margin_left = -42.0
-margin_top = -40.0
-margin_right = 199.0
-margin_bottom = 47.0
-custom_fonts/font = SubResource( 4 )
-text = "Home"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="Label" parent="HomeTitle/Label"]
-margin_left = -70.0
-margin_top = 84.321
-margin_right = 310.0
-margin_bottom = 106.321
-custom_fonts/font = SubResource( 7 )
-text = "(Restore Posters and Eggs Here)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="StartScreen" parent="UI" instance=ExtResource( 26 )]
+
 [node name="PlayerUI" parent="UI" instance=ExtResource( 6 )]
+visible = false
 
 [node name="GameOverUI" parent="UI" instance=ExtResource( 25 )]
 
@@ -459,3 +441,4 @@ __meta__ = {
 [editable path="YSort/School/PosterableArea"]
 [editable path="YSort/ShoppingStrip/PosterableArea"]
 [editable path="YSort/SuperMarket/PosterableArea"]
+[editable path="YSort/BaseHouse/RestoreAmmo"]
