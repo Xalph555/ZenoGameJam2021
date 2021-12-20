@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Car/Car.tscn" type="PackedScene" id=2]
@@ -27,6 +27,9 @@
 [ext_resource path="res://UI/GameOverUI/GameOverUI.tscn" type="PackedScene" id=25]
 [ext_resource path="res://UI/StartScreen/StartScreen.tscn" type="PackedScene" id=26]
 [ext_resource path="res://NPCs/PosterRemover/PosterRemover.tscn" type="PackedScene" id=27]
+[ext_resource path="res://PowerUp/PaperPowerUp.tscn" type="PackedScene" id=28]
+[ext_resource path="res://PowerUp/DrinkPowerUp.tscn" type="PackedScene" id=29]
+[ext_resource path="res://PowerUp/GamePowerUp.tscn" type="PackedScene" id=30]
 
 [sub_resource type="Environment" id=3]
 background_mode = 4
@@ -470,6 +473,35 @@ polygon = PoolVector2Array( -272, -88, -272, 368, 264, 368, 264, -88 )
 [node name="PosterRemover" parent="YSort/SuperMarket/PosterRemovers" instance=ExtResource( 27 )]
 position = Vector2( 472, 2064 )
 _assigned_area = NodePath("../../PosterableArea")
+
+[node name="PowerUpInstances" type="YSort" parent="YSort"]
+
+[node name="DrinkPowerUp" parent="YSort/PowerUpInstances" instance=ExtResource( 29 )]
+position = Vector2( 1104, 1368 )
+
+[node name="DrinkPowerUp2" parent="YSort/PowerUpInstances" instance=ExtResource( 29 )]
+position = Vector2( 1208, 288 )
+
+[node name="DrinkPowerUp3" parent="YSort/PowerUpInstances" instance=ExtResource( 29 )]
+position = Vector2( 2480, 1016 )
+
+[node name="PaperPowerUp" parent="YSort/PowerUpInstances" instance=ExtResource( 28 )]
+position = Vector2( 1864, 544 )
+
+[node name="PaperPowerUp2" parent="YSort/PowerUpInstances" instance=ExtResource( 28 )]
+position = Vector2( 2816, 576 )
+
+[node name="PaperPowerUp3" parent="YSort/PowerUpInstances" instance=ExtResource( 28 )]
+position = Vector2( 920, 2072 )
+
+[node name="GamePowerUp" parent="YSort/PowerUpInstances" instance=ExtResource( 30 )]
+position = Vector2( 1776, 1016 )
+
+[node name="GamePowerUp2" parent="YSort/PowerUpInstances" instance=ExtResource( 30 )]
+position = Vector2( 1032, 576 )
+
+[node name="GamePowerUp3" parent="YSort/PowerUpInstances" instance=ExtResource( 30 )]
+position = Vector2( 488, 1000 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 1784, 2080 )

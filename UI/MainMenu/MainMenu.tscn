@@ -109,9 +109,9 @@ __meta__ = {
 
 [node name="LMB" type="TextureRect" parent="RichTextLabel/Control"]
 margin_left = 124.0
-margin_top = 344.0
+margin_top = 348.0
 margin_right = 154.0
-margin_bottom = 380.0
+margin_bottom = 384.0
 texture = ExtResource( 5 )
 expand = true
 __meta__ = {
@@ -120,9 +120,9 @@ __meta__ = {
 
 [node name="RMB" type="TextureRect" parent="RichTextLabel/Control"]
 margin_left = 124.0
-margin_top = 390.0
+margin_top = 395.0
 margin_right = 154.0
-margin_bottom = 426.0
+margin_bottom = 431.0
 texture = ExtResource( 4 )
 expand = true
 __meta__ = {

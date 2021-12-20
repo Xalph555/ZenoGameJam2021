@@ -53,6 +53,9 @@ func update_movement(delta: float) -> void:
 			
 		else:
 			_move_dir = Vector2.ZERO
+			
+	else:
+		_move_dir = Vector2.ZERO
 	
 	_velocity = _move_dir * _move_speed
 	_velocity = move_and_slide(_velocity)
@@ -75,7 +78,7 @@ func update_sprite() -> void:
 func heal_target() -> void:
 	if _can_heal and _dist_to_target < 15:
 		_can_heal = false
-		_target.health += heal_amount
+		_target.heal_object(heal_amount)
 		
 		_heal_particles.emitting = true
 		
@@ -98,7 +101,6 @@ func find_target() -> void:
 			_can_heal = true
 			
 			_target.connect("object_postered", self, "_on_object_postered")
-			
 			break
 
 

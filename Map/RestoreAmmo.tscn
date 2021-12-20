@@ -124,9 +124,9 @@ anims/RESET = SubResource( 10 )
 
 [node name="Label" type="Label" parent="HomeTitle"]
 margin_left = -42.0
-margin_top = -37.8117
+margin_top = -21.4652
 margin_right = 199.0
-margin_bottom = 49.1883
+margin_bottom = 65.5348
 custom_fonts/font = SubResource( 11 )
 text = "Home"
 __meta__ = {

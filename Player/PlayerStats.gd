@@ -10,6 +10,7 @@ signal egg_ammo_changed(ammo)
 
 signal out_of_posters
 
+signal power_up_ended
 
 # properties
 export var base_poster_ammo := 50
@@ -19,6 +20,8 @@ onready var score := 0 setget set_score
 
 onready var poster_ammo := base_poster_ammo setget set_poster_ammo
 onready var egg_ammo := base_egg_ammo setget set_egg_ammo
+
+onready var _power_up_timer := $PowerUpTimer
 
 
 func reset_stats() -> void:
@@ -43,3 +46,11 @@ func set_poster_ammo(amount : int):
 func set_egg_ammo(amount : int):
 	egg_ammo = amount
 	emit_signal("egg_ammo_changed", egg_ammo)
+
+
+func start_power_up_timer(duration : float) -> void:
+	_power_up_timer.start(duration)
+
+
+func _on_PowerUpTimer_timeout() -> void:
+	emit_signal("power_up_ended")

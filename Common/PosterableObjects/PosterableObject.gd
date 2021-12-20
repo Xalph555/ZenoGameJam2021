@@ -58,6 +58,11 @@ func hurt_flash() -> void:
 	_sprite.material.set_shader_param("active", false)
 
 
+func heal_object(amount: int) -> void:
+	self.health += amount
+	emit_signal("health_changed", amount)
+
+
 func _on_HurtBox_area_entered(area: Area2D) -> void:
 	var _poster := area as Hitbox
 	

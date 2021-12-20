@@ -10,7 +10,7 @@ export var eggs_to_throw := 1
 
 var _in_player_control := false
 
-var _move_speed := 250.0
+var move_speed := 250.0
 var mouse_dir := Vector2.ZERO
 var move_dir := Vector2.ZERO
 var velocity := Vector2.ZERO
@@ -26,6 +26,8 @@ onready var anim_player := $AnimationPlayer
 func _ready() -> void:
 	GameEvents.connect("start_game", self, "_on_start_game")
 	GameEvents.connect("game_over", self, "_on_game_over")
+	
+	PlayerStats.connect("power_up_ended", self, "_on_power_up_ended")
 
 
 func get_input() -> void:
@@ -57,7 +59,7 @@ func _physics_process(delta: float) -> void:
 
 
 func update_movement(delta: float) -> void:
-	velocity = move_dir * _move_speed
+	velocity = move_dir * move_speed
 	velocity = move_and_slide(velocity)
 
 
@@ -98,3 +100,10 @@ func _on_start_game() -> void:
 
 func _on_game_over() -> void:
 	_in_player_control = false
+
+
+func _on_power_up_ended() -> void:
+	posters_to_fire = 1
+	eggs_to_throw = 1
+	
+	move_speed = 250.0
