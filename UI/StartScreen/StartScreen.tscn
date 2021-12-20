@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Fonts/upheavtt.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/StartScreen/StartScreen.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Common/PosterableObjects/Lamp.png" type="Texture" id=7]
 [ext_resource path="res://Common/PosterableObjects/MoviePoster.png" type="Texture" id=8]
 [ext_resource path="res://Common/PosterableObjects/Window.png" type="Texture" id=9]
+[ext_resource path="res://UI/StartScreen/09battle8.wav" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=6]
 resource_name = "GoodLuck"
@@ -529,6 +530,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+_game_music = ExtResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
@@ -546,6 +548,7 @@ __meta__ = {
 }
 
 [node name="WhatToPosters" type="Control" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -615,7 +618,6 @@ texture = ExtResource( 5 )
 hframes = 3
 
 [node name="GoodLuck" type="Control" parent="."]
-visible = false
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0

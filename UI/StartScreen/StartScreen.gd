@@ -5,7 +5,7 @@ extends Control
 
 
 onready var anim_player := $AnimationPlayer
-
+export(AudioStreamSample) var _game_music
 
 func _ready() -> void:
 	start_sequence()
@@ -18,6 +18,7 @@ func start_sequence() -> void:
 	anim_player.play("GoodLuck")
 	yield(anim_player, "animation_finished")
 	anim_player.play("ReadyStart")
+	BackgroundMusic.change_track(_game_music)
 	yield(anim_player, "animation_finished")
 	
 	GameEvents.emit_signal("start_game")

@@ -84,6 +84,9 @@ func update_sprites() -> void:
 
 
 func remove_player_control() -> void:
+	move_dir = Vector2.ZERO
+	velocity = Vector2.ZERO
+	
 	anim_player.play("Idle")
 	_sfx_player.stop()
 	
@@ -93,6 +96,9 @@ func remove_player_control() -> void:
 
 
 func return_player_control() -> void:
+	move_dir = Vector2.ZERO
+	velocity = Vector2.ZERO
+	
 	anim_player.play("Idle")
 	_sfx_player.stop()
 	
@@ -107,6 +113,12 @@ func _on_start_game() -> void:
 
 func _on_game_over() -> void:
 	_in_player_control = false
+	
+	move_dir = Vector2.ZERO
+	velocity = Vector2.ZERO
+	
+	anim_player.play("Idle")
+	_sfx_player.stop()
 
 
 func _on_power_up_ended() -> void:

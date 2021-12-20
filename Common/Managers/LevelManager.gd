@@ -5,8 +5,8 @@ extends Node2D
 
 class_name LevelManager
 
-
 export(Array, NodePath) var posterable_area_paths
+export(AudioStreamSample) var _game_over_music
 
 # NOTE TO SELF: Let us not do this coupling - please fix after jam
 export(NodePath) onready var _player_ui = get_node(_player_ui) as PlayerUI
@@ -28,11 +28,6 @@ func _ready() -> void:
 	
 	GameEvents.connect("start_game", self, "_on_start_game")
 	GameEvents.connect("reload_game", self, "_on_reload_game")
-	
-	# FOR TESTING
-	#yield(get_tree().create_timer(2), "timeout")
-	#GameEvents.emit_signal("start_game")
-	#start_game()
 
 
 func _process(delta: float) -> void:
@@ -54,6 +49,7 @@ func start_game() -> void:
 
 func stop_game() -> void:
 	GameEvents.emit_signal("game_over")
+	BackgroundMusic.change_track(_game_over_music)
 	
 	_player_ui.visible = false
 	_game_over_ui.play_transition()

@@ -86,8 +86,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameEvents="*res://Common/Managers/GameEvents.gd"
 PlayerStats="*res://Player/PlayerStats.tscn"
+GameEvents="*res://Common/Managers/GameEvents.gd"
+BackgroundMusic="*res://Common/BackgroundMusic.tscn"
 
 [display]
 
