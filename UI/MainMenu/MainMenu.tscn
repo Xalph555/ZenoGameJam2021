@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/upheavtt.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/MainMenu/MainMenu.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://UI/MainMenu/RMBButton.png" type="Texture" id=4]
 [ext_resource path="res://UI/MainMenu/LMBButton.png" type="Texture" id=5]
 [ext_resource path="res://UI/MainMenu/WASDButton.png" type="Texture" id=6]
+[ext_resource path="res://Projectiles/Poster/PaperRef.png" type="Texture" id=7]
+[ext_resource path="res://Player/PosterGun/GunRef.png" type="Texture" id=8]
+[ext_resource path="res://Projectiles/Egg/EggRef.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 resource_local_to_scene = true
@@ -83,10 +86,10 @@ __meta__ = {
 }
 
 [node name="WASD" type="TextureRect" parent="RichTextLabel/Control"]
-margin_left = 108.0
-margin_top = 292.0
-margin_right = 170.0
-margin_bottom = 336.0
+margin_left = 105.0
+margin_top = 289.0
+margin_right = 172.0
+margin_bottom = 337.0
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
@@ -94,10 +97,10 @@ __meta__ = {
 }
 
 [node name="E" type="TextureRect" parent="RichTextLabel/Control"]
-margin_left = 369.0
+margin_left = 375.0
 margin_top = 306.0
-margin_right = 405.0
-margin_bottom = 338.0
+margin_right = 403.0
+margin_bottom = 333.0
 texture = ExtResource( 3 )
 expand = true
 __meta__ = {
@@ -121,6 +124,39 @@ margin_top = 390.0
 margin_right = 154.0
 margin_bottom = 426.0
 texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PosterGun" type="TextureRect" parent="RichTextLabel/Control"]
+margin_left = 493.0
+margin_top = 347.0
+margin_right = 523.0
+margin_bottom = 383.0
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PosterGun2" type="TextureRect" parent="RichTextLabel/Control"]
+margin_left = 541.0
+margin_top = 347.0
+margin_right = 571.0
+margin_bottom = 383.0
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Egg" type="TextureRect" parent="RichTextLabel/Control"]
+margin_left = 771.0
+margin_top = 395.0
+margin_right = 801.0
+margin_bottom = 431.0
+texture = ExtResource( 9 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false

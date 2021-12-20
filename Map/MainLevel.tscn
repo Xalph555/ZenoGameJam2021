@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Car/Car.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://Map/RestoreAmmo.tscn" type="PackedScene" id=24]
 [ext_resource path="res://UI/GameOverUI/GameOverUI.tscn" type="PackedScene" id=25]
 [ext_resource path="res://UI/StartScreen/StartScreen.tscn" type="PackedScene" id=26]
+[ext_resource path="res://NPCs/PosterRemover/PosterRemover.tscn" type="PackedScene" id=27]
 
 [sub_resource type="Environment" id=3]
 background_mode = 4
@@ -65,7 +66,7 @@ _player_ui = NodePath("../UI/PlayerUI")
 _game_over_ui = NodePath("../UI/GameOverUI")
 
 [node name="LevelTimer" parent="LevelManager" index="0"]
-wait_time = 120.0
+wait_time = 150.0
 
 [node name="WorldBarrier" type="Node2D" parent="."]
 
@@ -135,6 +136,22 @@ position = Vector2( 1104, 2024 )
 [node name="TallHouse3" parent="YSort/Buildings" instance=ExtResource( 12 )]
 position = Vector2( 2480, 2024 )
 
+[node name="BaseHouse" type="YSort" parent="YSort"]
+
+[node name="BaseHouse" parent="YSort/BaseHouse" instance=ExtResource( 12 )]
+modulate = Color( 1, 0.952941, 0.694118, 1 )
+position = Vector2( 1784, 2024 )
+
+[node name="RestoreAmmo" parent="YSort/BaseHouse" instance=ExtResource( 24 )]
+
+[node name="Label" parent="YSort/BaseHouse/RestoreAmmo/HomeTitle" index="1"]
+margin_top = -16.0
+margin_bottom = 71.0
+custom_fonts/font = SubResource( 4 )
+
+[node name="Label2" parent="YSort/BaseHouse/RestoreAmmo/HomeTitle/Label" index="0"]
+custom_fonts/font = SubResource( 5 )
+
 [node name="Cinema" type="YSort" parent="YSort"]
 
 [node name="Cinema" parent="YSort/Cinema" instance=ExtResource( 9 )]
@@ -191,6 +208,16 @@ points = PoolVector2Array( 0, 0, 0, -601 )
 
 [node name="CollisionPolygon2D" parent="YSort/Cinema/PosterableArea/PlayerEnteredArea" index="0"]
 polygon = PoolVector2Array( -304, 24, -304, 368, 304, 368, 304, 24 )
+
+[node name="PosterRemovers" type="YSort" parent="YSort/Cinema"]
+
+[node name="PosterRemover" parent="YSort/Cinema/PosterRemovers" instance=ExtResource( 27 )]
+position = Vector2( 2624, 680 )
+_assigned_area = NodePath("../../PosterableArea")
+
+[node name="PosterRemover2" parent="YSort/Cinema/PosterRemovers" instance=ExtResource( 27 )]
+position = Vector2( 2264, 552 )
+_assigned_area = NodePath("../../PosterableArea")
 
 [node name="Park" type="YSort" parent="YSort"]
 
@@ -255,6 +282,20 @@ points = PoolVector2Array( 0, 0, 0, -56, 0, -680 )
 [node name="CollisionPolygon2D" parent="YSort/Park/PosterableArea/PlayerEnteredArea" index="0"]
 polygon = PoolVector2Array( -600, 288, 552, 288, 552, -176, -600, -176 )
 
+[node name="PosterRemovers" type="YSort" parent="YSort/Park"]
+
+[node name="PosterRemover" parent="YSort/Park/PosterRemovers" instance=ExtResource( 27 )]
+position = Vector2( 1144, 368 )
+_assigned_area = NodePath("../../PosterableArea")
+
+[node name="PosterRemover2" parent="YSort/Park/PosterRemovers" instance=ExtResource( 27 )]
+position = Vector2( 1728, 472 )
+_assigned_area = NodePath("../../PosterableArea")
+
+[node name="PosterRemover3" parent="YSort/Park/PosterRemovers" instance=ExtResource( 27 )]
+position = Vector2( 1304, 632 )
+_assigned_area = NodePath("../../PosterableArea")
+
 [node name="School" type="YSort" parent="YSort"]
 
 [node name="HighSchool" parent="YSort/School" instance=ExtResource( 8 )]
@@ -309,6 +350,16 @@ points = PoolVector2Array( 0, 0, 0, -56, 0, -579 )
 [node name="CollisionPolygon2D" parent="YSort/School/PosterableArea/PlayerEnteredArea" index="0"]
 polygon = PoolVector2Array( -280, 352, 264, 352, 256, -208, -280, -208 )
 
+[node name="PosterRemovers" type="YSort" parent="YSort/School"]
+
+[node name="PosterRemover" parent="YSort/School/PosterRemovers" instance=ExtResource( 27 )]
+position = Vector2( 360.629, 1297.24 )
+_assigned_area = NodePath("../../PosterableArea")
+
+[node name="PosterRemover2" parent="YSort/School/PosterRemovers" instance=ExtResource( 27 )]
+position = Vector2( 616, 1008 )
+_assigned_area = NodePath("../../PosterableArea")
+
 [node name="ShoppingStrip" type="YSort" parent="YSort"]
 
 [node name="ShoppingStrip" parent="YSort/ShoppingStrip" instance=ExtResource( 10 )]
@@ -358,6 +409,16 @@ points = PoolVector2Array( 0, 0, 0, -56, 0, -489 )
 [node name="CollisionPolygon2D" parent="YSort/ShoppingStrip/PosterableArea/PlayerEnteredArea" index="0"]
 polygon = PoolVector2Array( -632, -177, -632, 167, 640, 167, 640, -177 )
 
+[node name="PosterRemovers" type="YSort" parent="YSort/ShoppingStrip"]
+
+[node name="PosterRemover" parent="YSort/ShoppingStrip/PosterRemovers" instance=ExtResource( 27 )]
+position = Vector2( 1760, 1024 )
+_assigned_area = NodePath("../../PosterableArea")
+
+[node name="PosterRemover2" parent="YSort/ShoppingStrip/PosterRemovers" instance=ExtResource( 27 )]
+position = Vector2( 2520, 1024 )
+_assigned_area = NodePath("../../PosterableArea")
+
 [node name="SuperMarket" type="YSort" parent="YSort"]
 
 [node name="SuperMarket" parent="YSort/SuperMarket" instance=ExtResource( 13 )]
@@ -404,21 +465,11 @@ points = PoolVector2Array( 0, 0, 0, -56, 0, -477 )
 [node name="CollisionPolygon2D" parent="YSort/SuperMarket/PosterableArea/PlayerEnteredArea" index="0"]
 polygon = PoolVector2Array( -272, -88, -272, 368, 264, 368, 264, -88 )
 
-[node name="BaseHouse" type="YSort" parent="YSort"]
+[node name="PosterRemovers" type="YSort" parent="YSort/SuperMarket"]
 
-[node name="BaseHouse" parent="YSort/BaseHouse" instance=ExtResource( 12 )]
-modulate = Color( 1, 0.952941, 0.694118, 1 )
-position = Vector2( 1784, 2024 )
-
-[node name="RestoreAmmo" parent="YSort/BaseHouse" instance=ExtResource( 24 )]
-
-[node name="Label" parent="YSort/BaseHouse/RestoreAmmo/HomeTitle" index="1"]
-margin_top = -16.0
-margin_bottom = 71.0
-custom_fonts/font = SubResource( 4 )
-
-[node name="Label2" parent="YSort/BaseHouse/RestoreAmmo/HomeTitle/Label" index="0"]
-custom_fonts/font = SubResource( 5 )
+[node name="PosterRemover" parent="YSort/SuperMarket/PosterRemovers" instance=ExtResource( 27 )]
+position = Vector2( 472, 2064 )
+_assigned_area = NodePath("../../PosterableArea")
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 1784, 2080 )
@@ -436,9 +487,9 @@ visible = false
 [node name="GameOverUI" parent="UI" instance=ExtResource( 25 )]
 
 [editable path="LevelManager"]
+[editable path="YSort/BaseHouse/RestoreAmmo"]
 [editable path="YSort/Cinema/PosterableArea"]
 [editable path="YSort/Park/PosterableArea"]
 [editable path="YSort/School/PosterableArea"]
 [editable path="YSort/ShoppingStrip/PosterableArea"]
 [editable path="YSort/SuperMarket/PosterableArea"]
-[editable path="YSort/BaseHouse/RestoreAmmo"]

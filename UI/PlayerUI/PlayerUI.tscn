@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://UI/PlayerUI/PlayerUI.gd" type="Script" id=1]
 [ext_resource path="res://UI/PlayerUI/AreaProgress.tscn" type="PackedScene" id=2]
@@ -220,6 +220,13 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
+[sub_resource type="DynamicFont" id=9]
+resource_local_to_scene = true
+size = 32
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
 [node name="PlayerUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -349,6 +356,23 @@ margin_right = 183.5
 margin_bottom = 92.0
 custom_fonts/font = SubResource( 8 )
 text = "Area Complete"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AreaCompleteLabel2" type="Label" parent="AreaCompleteLabel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.5
+margin_top = 27.0
+margin_right = 104.5
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 9 )
+text = "(time added)"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

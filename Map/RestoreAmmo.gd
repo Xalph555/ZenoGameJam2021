@@ -15,5 +15,4 @@ func _on_body_entered(body: Node) -> void:
 
 
 func _on_start_game() -> void:
-	$HomeTitle.visible = true
-	print("yes")
+	self.visible = true

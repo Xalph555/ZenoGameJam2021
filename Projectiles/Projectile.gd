@@ -23,15 +23,3 @@ func shoot(shoot_rot: float, start_pos: Vector2, projectile_speed: float) -> voi
 	move_speed = projectile_speed
 	rotation = shoot_rot + rot_adjust
 	self.global_position = start_pos
-
-
-func _on_HurtBox_area_entered(area: Area2D) -> void:
-	call_deferred("free")
-func _on_HurtBox_body_entered(body: Node) -> void:
-	call_deferred("free")
-
-
-func _on_Timer_timeout() -> void:
-	call_deferred("free")
-
-

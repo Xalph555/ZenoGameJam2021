@@ -20,6 +20,7 @@ onready var _sprite := $Sprite
 onready var _poster_gun := $Gun
 onready var _egg_thrower := $EggThrower
 onready var collision_shape := $CollisionShape2D
+onready var anim_player := $AnimationPlayer
 
 
 func _ready() -> void:
@@ -71,6 +72,12 @@ func update_sprites() -> void:
 		
 	else:
 		_poster_gun.visible = false
+	
+	if velocity.length() < 1:
+		anim_player.play("Idle")
+	
+	else:
+		anim_player.play("Run")
 
 
 func remove_player_control() -> void:

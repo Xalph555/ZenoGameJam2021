@@ -78,10 +78,10 @@ func _on_object_postered(object) -> void:
 
 
 func _on_PlayerEnteredArea_body_entered(body: Node) -> void:
-	if is_active:
-		$Line2D.visible = false
+	if is_active and $PlayerEnteredArea.get_overlapping_bodies():
+			$Line2D.visible = false
 
 
 func _on_PlayerEnteredArea_body_exited(body: Node) -> void:
-	if is_active:
-		$Line2D.visible = true
+	if is_active and !$PlayerEnteredArea.get_overlapping_bodies():
+			$Line2D.visible = true
