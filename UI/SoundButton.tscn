@@ -1,0 +1,78 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Fonts/upheavtt.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://UI/Click.wav" type="AudioStream" id=2]
+[ext_resource path="res://UI/SoundButton.gd" type="Script" id=3]
+[ext_resource path="res://UI/ButtonNormal.png" type="Texture" id=4]
+[ext_resource path="res://UI/ButtonHover.png" type="Texture" id=5]
+[ext_resource path="res://UI/ButtonDisabled.png" type="Texture" id=6]
+[ext_resource path="res://UI/ButtonPressed.png" type="Texture" id=7]
+
+[sub_resource type="DynamicFont" id=2]
+resource_local_to_scene = true
+size = 48
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 184, 82 )
+margin_left = 25.8313
+margin_right = 12.8689
+margin_top = 11.1633
+margin_bottom = 20.2175
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 184, 82 )
+margin_left = 26.2776
+margin_right = 12.9397
+margin_top = 10.949
+margin_bottom = 16.6593
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 184, 82 )
+margin_left = 26.1429
+margin_right = 13.2593
+margin_top = 11.0737
+margin_bottom = 23.243
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 184, 82 )
+margin_left = 25.9526
+margin_right = 12.9555
+margin_top = 10.8026
+margin_bottom = 21.6168
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 184, 82 )
+margin_left = 26.1681
+margin_right = 12.9884
+margin_top = 10.9497
+margin_bottom = 20.854
+
+[node name="SoundButton" type="Button"]
+margin_right = 184.0
+margin_bottom = 80.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 3 )
+text = "Play"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "UISFX"
+
+[connection signal="button_down" from="." to="." method="_on_SoundButton_button_down"]

@@ -19,6 +19,7 @@ height = 6.0
 
 [sub_resource type="CapsuleShape2D" id=9]
 radius = 11.5
+height = 22.0
 
 [sub_resource type="Curve" id=10]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.3 ), 0.0, 0.0, 0, 0 ]

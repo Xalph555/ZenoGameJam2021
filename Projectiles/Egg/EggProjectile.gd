@@ -1,12 +1,25 @@
+#--------------------------------------#
+# Egg Projectile Script                #
+#--------------------------------------#
 extends Projectile
 
 
+# Variables:
+#---------------------------------------
+onready var _timer := $Timer
+onready var _particles := $Particles2D
+onready var _sfx := $AudioStreamPlayer2D
+
+
+# Functions:
+#---------------------------------------
 func egg_break() -> void:
-	$Timer.stop()
+	_timer.stop()
 	move_dir = Vector2.ZERO
+	move_speed = 0
 	self.self_modulate = Color(1, 1, 1, 0)
-	$Particles2D.emitting = true
-	$AudioStreamPlayer2D.play()
+	_particles.emitting = true
+	_sfx.play()
 	yield(get_tree().create_timer(1), "timeout")
 	call_deferred("free")
 

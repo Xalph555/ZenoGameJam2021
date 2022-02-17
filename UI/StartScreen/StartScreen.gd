@@ -1,13 +1,19 @@
-# Start Screen Script
-# -------------------------
-
+#--------------------------------------#
+# Start Screen Script                  #
+#--------------------------------------#
 extends Control
 
 
+# Variables:
+#---------------------------------------
 onready var anim_player := $AnimationPlayer
 export(AudioStreamSample) var _game_music
 
+
+# Functions:
+#---------------------------------------
 func _ready() -> void:
+	yield(get_tree(), "idle_frame")
 	start_sequence()
 
 

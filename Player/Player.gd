@@ -1,10 +1,13 @@
-# Player Script
-# ------------------------------
-
+#--------------------------------------#
+# Player Script                        #
+#--------------------------------------#
 extends KinematicBody2D
 
 class_name Player
 
+
+# Variables:
+#---------------------------------------
 export var posters_to_fire := 1
 export var eggs_to_throw := 1
 
@@ -24,6 +27,8 @@ onready var anim_player := $AnimationPlayer
 onready var _sfx_player := $AudioStreamPlayer
 
 
+# Functions:
+#---------------------------------------
 func _ready() -> void:
 	GameEvents.connect("start_game", self, "_on_start_game")
 	GameEvents.connect("game_over", self, "_on_game_over")
@@ -111,7 +116,7 @@ func _on_start_game() -> void:
 	_in_player_control = true
 
 
-func _on_game_over() -> void:
+func _on_game_over(has_won : bool) -> void:
 	_in_player_control = false
 	
 	move_dir = Vector2.ZERO

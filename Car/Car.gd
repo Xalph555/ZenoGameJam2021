@@ -1,15 +1,18 @@
-# Car Script
-# --------------------
-
+#--------------------------------------#
+# Car Script                           #
+#--------------------------------------#
 extends KinematicBody2D
 
 class_name Car
 
+
+# Variables:
+#---------------------------------------
 export(AudioStreamSample) var sfx_car_drive
 export(AudioStreamSample) var sfx_car_interact
 
 var _in_player_control := false
-var _player_reference : Player
+var player_reference : Player
 var _player_enter_pos := Vector2.ZERO
 
 # car movement vars
@@ -37,12 +40,14 @@ onready var _interact_label = $LabelPosition
 onready var _sfx_player = $AudioStreamPlayer2D
 
 
+# Functions:
+#---------------------------------------
 func _ready() -> void:
 	GameEvents.connect("game_over", self, "_on_game_over")
 
 
 func _input(event: InputEvent) -> void:
-	if _player_reference:
+	if player_reference:
 		if event.is_action_pressed("ui_interact"):
 			if !_in_player_control:
 				player_enter_car()
@@ -123,12 +128,12 @@ func apply_friction() -> void:
 
 
 func player_enter_car() -> void:
-	_player_reference.remove_player_control()
+	player_reference.remove_player_control()
 	_in_player_control = true
 	
-	_player_enter_pos = to_local(_player_reference.global_position)
+	_player_enter_pos = to_local(player_reference.global_position)
 	
-	_player_reference.visible = false
+	player_reference.visible = false
 	_interact_label.visible = false
 	
 	_player_camera.current = true
@@ -141,12 +146,12 @@ func player_enter_car() -> void:
 func player_exit_car() -> void:
 	play_sfx(sfx_car_interact)
 	
-	_player_reference.return_player_control()
+	player_reference.return_player_control()
 	_in_player_control = false
 	
-	_player_reference.global_position = to_global(_player_enter_pos)
+	player_reference.global_position = to_global(_player_enter_pos)
 	
-	_player_reference.visible = true
+	player_reference.visible = true
 	
 	_player_camera.current = false
 
@@ -158,17 +163,17 @@ func play_sfx(sfx : AudioStreamSample) -> void:
 
 
 func _on_PlayerInteractArea_body_entered(body: Node) -> void:
-	_player_reference = body as Player
+	player_reference = body as Player
 	
-	if _player_reference != null:
+	if player_reference != null:
 		_interact_label.visible = true
 
 
 func _on_PlayerInteractArea_body_exited(body: Node) -> void:
-	if !_in_player_control and body == _player_reference:
-		_player_reference = null
+	if !_in_player_control and body == player_reference:
+		player_reference = null
 		_interact_label.visible = false
 
 
-func _on_game_over() -> void:
+func _on_game_over(has_won : bool) -> void:
 	_in_player_control = false

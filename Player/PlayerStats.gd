@@ -1,9 +1,11 @@
-# Player Stats Singleton Script
-# -------------------------------
-
+#--------------------------------------#
+# Player Stats Singleton Script        #
+#--------------------------------------#
 extends Node
 
-# signals
+
+# Signals:
+#---------------------------------------
 signal score_changed(score)
 signal poster_ammo_changed(ammo)
 signal egg_ammo_changed(ammo)
@@ -12,7 +14,9 @@ signal out_of_posters
 
 signal power_up_ended
 
-# properties
+
+# Variables:
+#---------------------------------------
 export var base_poster_ammo := 50
 export var base_egg_ammo := 10
 
@@ -24,6 +28,8 @@ onready var egg_ammo := base_egg_ammo setget set_egg_ammo
 onready var _power_up_timer := $PowerUpTimer
 
 
+# Functions:
+#---------------------------------------
 func reset_stats() -> void:
 	score = 0
 	poster_ammo = base_poster_ammo

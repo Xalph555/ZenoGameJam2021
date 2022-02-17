@@ -1,10 +1,22 @@
+#--------------------------------------#
+# Poster projectile Script             #
+#--------------------------------------#
 extends Projectile
 
 
+# Variables:
+#---------------------------------------
+onready var _timer := $Timer
+onready var _sfx := $AudioStreamPlayer2D
+
+
+# Functions:
+#---------------------------------------
 func remove_flying_poster() -> void:
-	$Timer.stop()
+	_timer.stop()
 	move_dir = Vector2.ZERO
-	$AudioStreamPlayer2D.play()
+	move_speed = 0
+	_sfx.play()
 	yield(get_tree().create_timer(0.1), "timeout")
 	call_deferred("free")
 

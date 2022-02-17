@@ -8,11 +8,12 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+_max_arrow_dist = 250.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 234.0
+margin_left = 350.0
 margin_top = -12.0
-margin_right = 242.0
+margin_right = 358.0
 rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 __meta__ = {

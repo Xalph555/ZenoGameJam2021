@@ -1,10 +1,13 @@
-# General Projectile Script
-# -------------------------
-
+#--------------------------------------#
+# Base Projectile Script               #
+#--------------------------------------#
 extends Sprite
 
 class_name Projectile
 
+
+# Variables:
+#---------------------------------------
 export var rot_adjust := 0.0
 
 var move_speed := 0.0
@@ -13,6 +16,8 @@ var move_dir := Vector2(0, -1)
 var velocity := Vector2.ZERO
 
 
+# Functions:
+#---------------------------------------
 func _physics_process(delta: float) -> void:
 	velocity = move_dir * move_speed
 	position += velocity * delta

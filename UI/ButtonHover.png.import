@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/index.apple-touch-icon.png-db11d6c25d537f7c316262c9c5b1fe9a.stex"
+path="res://.import/ButtonHover.png-0fb7549a94feb6c1e454715a61397cdf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Builds/index.apple-touch-icon.png"
-dest_files=[ "res://.import/index.apple-touch-icon.png-db11d6c25d537f7c316262c9c5b1fe9a.stex" ]
+source_file="res://UI/ButtonHover.png"
+dest_files=[ "res://.import/ButtonHover.png-0fb7549a94feb6c1e454715a61397cdf.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

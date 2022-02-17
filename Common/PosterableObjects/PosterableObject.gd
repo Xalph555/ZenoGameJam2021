@@ -1,12 +1,19 @@
-# Posterable Object Script
-# -------------------------------
-
+#--------------------------------------#
+# Posterable Object Script             #
+#--------------------------------------#
 extends StaticBody2D
+
 class_name PosterableObject
 
+
+# Signals:
+#---------------------------------------
 signal health_changed(amount)
 signal object_postered(object)
 
+
+# Variables:
+#---------------------------------------
 export var max_health := 50
 export var points := 0
 
@@ -21,6 +28,8 @@ onready var _hurt_box := $HurtBox
 onready var _sfx_player := $AudioStreamPlayer2D
 
 
+# Functions:
+#---------------------------------------
 func _ready() -> void:
 	_health_bar.max_value = max_health
 

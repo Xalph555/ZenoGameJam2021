@@ -1,22 +1,26 @@
-# Level Manager Sungleton Script
-# ----------------------------
-
+#--------------------------------------#
+# Level Manager Singleton Script       #
+#--------------------------------------#
 extends Node2D
 
 class_name LevelManager
 
+
+# Variables:
+#---------------------------------------
 export(Array, NodePath) var posterable_area_paths
 export(AudioStreamSample) var _game_over_music
 
-# NOTE TO SELF: Let us not do this coupling - please fix after jam
 export(NodePath) onready var _player_ui = get_node(_player_ui) as PlayerUI
-export(NodePath) onready var _game_over_ui = get_node(_game_over_ui)
 
 var posterable_areas = []
+var _stop_game_triggered := false
 
-onready var _level_timer = $LevelTimer
+onready var _level_timer := $LevelTimer
 
 
+# Functions:
+#---------------------------------------
 func _ready() -> void:
 	# instantiate posterable_areas array
 	for i in posterable_area_paths:
@@ -34,7 +38,8 @@ func _process(delta: float) -> void:
 	if get_remaining_time() >= 0:
 		GameEvents.emit_signal("time_changed", get_remaining_time())
 	
-	if posterable_areas.size() <= 0:
+	if posterable_areas.size() <= 0 and not _stop_game_triggered:
+		_stop_game_triggered = true
 		_level_timer.stop()
 		stop_game(true)
 
@@ -51,15 +56,10 @@ func start_game() -> void:
 func stop_game(has_won : bool = false) -> void:
 	_level_timer.stop()
 	
-	GameEvents.emit_signal("game_over")
+	GameEvents.emit_signal("game_over", has_won)
 	BackgroundMusic.change_track(_game_over_music)
 	
 	_player_ui.visible = false
-	
-	if has_won:
-		_game_over_ui.set_win_title()
-	
-	_game_over_ui.play_transition()
 
 
 # Level Timer Related Functions
@@ -107,4 +107,5 @@ func _on_start_game() -> void:
 
 
 func _on_reload_game() -> void:
+	PlayerStats.reset_stats()
 	get_tree().reload_current_scene()

@@ -1,11 +1,17 @@
-# Background music singleton
-# ------------------------------------
-
+#--------------------------------------#
+# Background music singleton script    #
+#--------------------------------------#
 extends Node2D
 
+
+# Signals:
+#---------------------------------------
 signal music_stopped
 signal music_changed
 
+
+# Variables:
+#---------------------------------------
 const TRANS_FADEIN = Tween.TRANS_QUART
 const EASE_FADEIN = Tween.EASE_OUT
 
@@ -16,6 +22,8 @@ onready var _music_player = $AudioStreamPlayer
 onready var _tween = $Tween
 
 
+# Functions:
+#---------------------------------------
 func start_playing() -> void:
 	_music_player.playing = true
 

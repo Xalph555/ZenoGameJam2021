@@ -1,8 +1,11 @@
-# Egg Thrower
-# ----------------------------
-
+#--------------------------------------#
+# Egg Thrower Script                   #
+#--------------------------------------#
 extends Node2D
 
+
+# Variables:
+#---------------------------------------
 export(PackedScene) var _egg_scene = _egg_scene as Projectile
 export var _projectile_force := 400
 
@@ -12,6 +15,8 @@ onready var _shoot_dir := Vector2.ZERO
 onready var _fire_point := $FirePoint
 
 
+# Functions:
+#---------------------------------------
 func _physics_process(delta: float) -> void:
 	_shoot_dir = _parent.mouse_dir
 	

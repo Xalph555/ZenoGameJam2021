@@ -1,16 +1,19 @@
-# Player UI script
-# -----------------------------
-
+#--------------------------------------#
+# Player UI script                     #
+#--------------------------------------#
 extends Control
 
 class_name PlayerUI
 
 
+# Variables:
+#---------------------------------------
 export(NodePath) onready var _progress_container = get_node(_progress_container) as VBoxContainer
 export(PackedScene) var _area_progress_scene = _area_progress_scene as AreaProgressBar
 
 export(NodePath) onready var _time_text = get_node(_time_text) as Label
 export(NodePath) onready var _score_text = get_node(_score_text) as Label
+export(NodePath) onready var _current_area_text = get_node(_current_area_text) as Label
 
 export(NodePath) onready var _egg_text = get_node(_egg_text) as Label
 export(NodePath) onready var _poster_text = get_node(_poster_text) as Label
@@ -18,10 +21,14 @@ export(NodePath) onready var _poster_text = get_node(_poster_text) as Label
 export(NodePath) onready var _indicator_container = get_node(_indicator_container) as CenterContainer
 export(PackedScene) var _indicator_arrow_scene
 
+export(Texture) var cursor
+
 onready var anim_player := $AnimationPlayer
 onready var _sfx_player := $AudioStreamPlayer
 
 
+# Functions:
+#---------------------------------------
 func _ready() -> void:
 	# connecting signals
 	GameEvents.connect("start_game", self, "reset_ui")
@@ -34,13 +41,17 @@ func _ready() -> void:
 
 func reset_ui() -> void:
 	set_time_text(1)
-	set_score_text(PlayerStats.score)
+	set_score_text(0)
 	set_egg_text(PlayerStats.egg_ammo)
 	set_poster_text(PlayerStats.poster_ammo)
 
 
 func create_area_bars(all_areas : Array) -> void:
 	for i in all_areas:
+		i.connect("area_completed", self, "_on_area_completed")
+		i.connect("player_entered_area", self, "_on_player_entered_area")
+		i.connect("player_exited_area", self, "_on_player_exited_area")
+		
 		# area bar 
 		var temp_progress_bar = _area_progress_scene.instance() as AreaProgressBar
 		_progress_container.add_child(temp_progress_bar)
@@ -48,15 +59,18 @@ func create_area_bars(all_areas : Array) -> void:
 		temp_progress_bar.set_area_name(i.area_name)
 		
 		i.connect("area_progress_changed", temp_progress_bar, "set_area_progress")
-		i.connect("area_completed", self, "_on_area_completed")
+		i.connect("player_entered_area", temp_progress_bar, "_on_player_entered_area")
+		i.connect("player_exited_area", temp_progress_bar, "_on_player_exited_area")
 		
-#		# indicator arrow
-#		var temp_indicator_arrow = _indicator_arrow_scene.instance()
-#		_indicator_container.add_child(temp_indicator_arrow)
-#
-#		temp_indicator_arrow.target = i
-#
-#		i.connect("area_completed", temp_indicator_arrow, "_on_area_completed")
+		# indicator arrow
+		var temp_indicator_arrow = _indicator_arrow_scene.instance()
+		_indicator_container.add_child(temp_indicator_arrow)
+
+		temp_indicator_arrow.target = i
+
+		i.connect("area_completed", temp_indicator_arrow, "_on_area_completed")
+		i.connect("player_entered_area", temp_indicator_arrow, "_on_player_entered_area")
+		i.connect("player_exited_area", temp_indicator_arrow, "_on_player_exited_area")
 
 
 func set_time_text(time: float) -> void:
@@ -84,6 +98,14 @@ func format_seconds(time: float) -> String:
 
 
 # signal call backs
+func _on_PlayerUI_visibility_changed() -> void:
+	if self.visible:
+		Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, cursor.get_size() / 2)
+		
+	else:
+		Input.set_custom_mouse_cursor(null)
+
+
 func _on_time_changed(time : float):
 	set_time_text(time)
 
@@ -100,6 +122,15 @@ func _on_egg_ammo_changed(ammo : int):
 	set_egg_text(ammo)
 
 
+func _on_player_entered_area(area_ref) -> void:
+	_current_area_text.text = "Current Area: " + area_ref.area_name
+
+
+func _on_player_exited_area(area_ref) -> void:
+	_current_area_text.text = "Current Area: -"
+	
+
 func _on_area_completed(_area, _time) -> void:
 	anim_player.play("AreaComplete")
 	_sfx_player.play()
+

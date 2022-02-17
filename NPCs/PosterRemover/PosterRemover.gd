@@ -1,9 +1,13 @@
-# Poster Remvoer Script
-# --------------------------------------
-
+#--------------------------------------#
+# Poster Remover Script                #
+#--------------------------------------#
 extends KinematicBody2D
+
 class_name PosterRemover
 
+
+# Variables:
+#---------------------------------------
 export(NodePath) onready var _assigned_area = get_node(_assigned_area) as PosterableArea
 
 export var heal_amount := 10
@@ -13,12 +17,15 @@ var _move_speed := 180.0
 var _move_dir := Vector2.ZERO
 var _velocity := Vector2.ZERO
 
-var _dist_to_target := 0.0
+#var _dist_to_target := 0.0
 
 var _target = null
 var _can_heal := false
 
 var is_stunned := false
+
+var _path := []
+var _navigation_area : Navigation2D
 
 onready var _heal_rate_timer := $HealRate
 onready var _stun_timer := $StunTimer
@@ -29,14 +36,19 @@ onready var _sprite := $Sprite
 onready var _heal_particles := $Particles2D
 
 
+# Functions:
+#---------------------------------------
 func _ready() -> void:
-	pass 
+	yield(get_tree(), "idle_frame")
+	
+	var tree = get_tree()
+	if tree.has_group("NavigationArea"):
+		_navigation_area = tree.get_nodes_in_group("NavigationArea")[0]
 
 
 func _process(delta: float) -> void:
 	if !is_stunned:
 		if _target:
-			_dist_to_target = self.global_position.distance_to(_target.global_position)
 			heal_target()
 
 		else:
@@ -46,21 +58,38 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if !is_stunned:
 		update_movement(delta)
+		update_sprite()
 
 
 func update_movement(delta: float) -> void:
 	if _target:
-		if _dist_to_target > 15:
-			_move_dir = self.global_position.direction_to(_target.global_position)
+		if _path.size() > 0:
+			if _velocity.length() > self.global_position.distance_to(_path[0]):
+				_velocity = self.global_position.direction_to(_path[0]) * (_move_speed)
+#				_velocity *= 0.5
+				
+			else:
+				_velocity = self.global_position.direction_to(_path[0]) * _move_speed
 			
+#			if global_position == _path[0]:
+			if self.global_position.distance_to(_path[0]) < 15:
+				_path.pop_front()
+				
 		else:
-			_move_dir = Vector2.ZERO
+			_velocity = Vector2.ZERO
+
 			
 	else:
-		_move_dir = Vector2.ZERO
+		_velocity = Vector2.ZERO
 	
-	_velocity = _move_dir * _move_speed
 	_velocity = move_and_slide(_velocity)
+
+
+func generate_path(destination : Vector2) -> void:
+	if not _navigation_area:
+		return
+	
+	_path = _navigation_area.get_simple_path(self.global_position, destination)
 
 
 func update_sprite() -> void:
@@ -78,7 +107,8 @@ func update_sprite() -> void:
 
 
 func heal_target() -> void:
-	if _can_heal and _dist_to_target < 15:
+#	if _can_heal and _dist_to_target < 15:
+	if _can_heal and _path.size() <= 0:
 		_can_heal = false
 		_target.heal_object(heal_amount)
 		
@@ -101,6 +131,7 @@ func find_target() -> void:
 		if (i.health > 0 and i.health < i.max_health) and i.is_npc_targetable:
 			_target = i
 			_target.is_npc_targetable = false
+			generate_path(_target.global_position)
 			
 			_can_heal = true
 			
@@ -129,4 +160,4 @@ func _on_HurtBox_area_entered(area: Area2D) -> void:
 func _on_StunTimer_timeout() -> void:
 	is_stunned = false
 	
-	_anim_player.stop()
+	_anim_player.play("Idle")

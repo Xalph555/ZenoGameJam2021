@@ -20,12 +20,24 @@ __meta__ = {
 }
 _area_name = NodePath("AreaName")
 _area_progress = NodePath("TextureProgress")
+_area_name_highlight = NodePath("AreaName/NameHighlight")
 
 [node name="AreaName" type="Label" parent="."]
 margin_right = 94.0
 margin_bottom = 14.0
 custom_fonts/font = SubResource( 1 )
 text = "AreaName: "
+
+[node name="NameHighlight" type="ColorRect" parent="AreaName"]
+visible = false
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -9.0
+color = Color( 2, 2, 2, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 margin_left = 98.0

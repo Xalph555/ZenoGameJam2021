@@ -1,9 +1,17 @@
-# Restore Ammo Script
-# -------------------------------
-
+#--------------------------------------#
+# Restore Ammo Area Script             #
+#--------------------------------------#
 extends Area2D
 
 
+# Variables:
+#---------------------------------------
+onready var _particles := $Particles2D
+onready var _sfx := $AudioStreamPlayer
+
+
+# Functions:
+#---------------------------------------
 func _ready() -> void:
 	GameEvents.connect("start_game", self, "_on_start_game")
 
@@ -11,9 +19,9 @@ func _ready() -> void:
 func _on_body_entered(body: Node) -> void:
 	PlayerStats.poster_ammo += PlayerStats.base_poster_ammo - PlayerStats.poster_ammo
 	PlayerStats.egg_ammo += PlayerStats.base_egg_ammo - PlayerStats.egg_ammo
-	$Particles2D.emitting = true
+	_particles.emitting = true
 	
-	$AudioStreamPlayer.play()
+	_sfx.play()
 
 
 func _on_start_game() -> void:

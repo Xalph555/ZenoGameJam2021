@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Fonts/upheavtt.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://PowerUp/GameBoyPowerUp.png" type="Texture" id=2]
-[ext_resource path="res://GamePowerUp.gd" type="Script" id=3]
+[ext_resource path="res://PowerUp/GamePowerUp.gd" type="Script" id=3]
 [ext_resource path="res://PowerUp/PowerUpBase.png" type="Texture" id=4]
 [ext_resource path="res://PowerUp/DM-CGS-33.wav" type="AudioStream" id=5]
 

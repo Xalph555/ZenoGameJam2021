@@ -1,8 +1,11 @@
-# Poster Gun Script
-# --------------------------------
-
+#--------------------------------------#
+# Poster Gun Script                    #
+#--------------------------------------#
 extends Node2D
 
+
+# Variables:
+#---------------------------------------
 export(PackedScene) var _poster_scene = _poster_scene as Projectile
 export var _projectile_force := 500
 
@@ -15,6 +18,8 @@ onready var _fire_point := $Pivot/FirePoint
 onready var _sfx_player := $AudioStreamPlayer
 
 
+# Functions:
+#---------------------------------------
 func _process(delta: float) -> void:
 	update_sprite()
 

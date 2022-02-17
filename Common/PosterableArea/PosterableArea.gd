@@ -1,13 +1,22 @@
-# Posterable Area Script
-# -----------------------------
-
+#--------------------------------------#
+# Posterable Area Script               #
+#--------------------------------------#
 extends Area2D
 
 class_name PosterableArea
 
+
+# Signals
+#---------------------------------------
 signal area_completed(area, time_to_add)
 signal area_progress_changed(progress_percent)
 
+signal player_entered_area(area_ref)
+signal player_exited_area(area_ref)
+
+
+# Variables:
+#---------------------------------------
 export var area_name := ""
 export var points := 0
 export var extra_time := 0.0
@@ -21,8 +30,12 @@ var is_active := true
 var is_intialised := false
 
 onready var collision_shape := $CollisionPolygon2D
+onready var _beacon := $Beacon
+onready var _player_entered_area := $PlayerEnteredArea
 
 
+# Functions:
+#---------------------------------------
 func _process(delta: float) -> void:
 	if is_active:
 		if is_intialised:
@@ -53,6 +66,7 @@ func checked_completed() -> void:
 		
 		PlayerStats.score += points
 		emit_signal("area_completed", self, extra_time)
+		_beacon.visible = false
 		
 		is_active = false
 
@@ -78,10 +92,39 @@ func _on_object_postered(object) -> void:
 
 
 func _on_PlayerEnteredArea_body_entered(body: Node) -> void:
-	if is_active and $PlayerEnteredArea.get_overlapping_bodies():
-			$Line2D.visible = false
+	var player = body as Player
+		
+	if not player:
+		if body is Car:
+			player = body.player_reference as Player
+			
+			if not player:
+				return
+		
+		else:
+			return
+			
+	if is_active and player: #_player_entered_area.get_overlapping_bodies():
+		_beacon.visible = false
+		
+		emit_signal("player_entered_area", self)
 
 
 func _on_PlayerEnteredArea_body_exited(body: Node) -> void:
-	if is_active and !$PlayerEnteredArea.get_overlapping_bodies():
-			$Line2D.visible = true
+	var player = body as Player
+		
+	if not player:
+		if body is Car:
+			player = body.player_reference as Player
+			
+			if not player:
+				return
+		
+		else:
+			return
+				
+	if is_active and player: #not _player_entered_area.get_overlapping_bodies():
+		_beacon.visible = true
+		
+		emit_signal("player_exited_area", self)
+		
