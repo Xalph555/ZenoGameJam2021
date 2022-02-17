@@ -274,7 +274,7 @@ margin_top = -21.5
 margin_right = 22.5
 margin_bottom = -12.5
 custom_fonts/font = SubResource( 5 )
-text = "+ 3 Attack"
+text = "Tri-Attack"
 __meta__ = {
 "_edit_use_anchors_": false
 }

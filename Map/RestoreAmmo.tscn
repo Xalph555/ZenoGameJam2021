@@ -144,7 +144,7 @@ margin_top = 84.321
 margin_right = 310.0
 margin_bottom = 106.321
 custom_fonts/font = SubResource( 12 )
-text = "(Restore Posters and Eggs Here)"
+text = "Restore Posters and Eggs Here"
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -520,7 +520,7 @@ position = Vector2( 488, 1000 )
 position = Vector2( 1784, 2080 )
 
 [node name="Car" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 1968, 2136 )
+position = Vector2( 1784, 2136 )
 
 [editable path="LevelManager"]
 [editable path="YSort/BaseHouse/RestoreAmmo"]
